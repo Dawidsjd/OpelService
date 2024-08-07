@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next-auth/firebase-adapter": "^2.0.1",
     "contentful": "^10.13.1",
     "daisyui": "^4.12.10",
     "firebase": "^10.12.5",
