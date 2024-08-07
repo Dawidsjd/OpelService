@@ -1,19 +1,13 @@
 // src/app/page.tsx
 import { createClient } from 'contentful';
-import Image from 'next/image';
 import NavbarOpel from '../components/NavbarOpel';
 
 // Item interface
 interface Item {
-  model: string;
-  url: string;
-  photo: {
-    fields: {
-      file: {
-        url: string;
-      };
-    };
-  };
+  category: string;
+  titleVideos: string[];
+  contentVideos: string[];
+  urlVideos: string[];
 }
 
 // Contentful client setup
@@ -31,27 +25,31 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 // Function to fetch data from Contentful with added delay
 async function fetchContentfulData(): Promise<Item[]> {
   // Simulate loading delay
-  await delay(2000); // 20 seconds delay
+  await delay(2000); // 2 seconds delay
 
-  const res = await client.getEntries({ content_type: 'opelCar' });
+  try {
+    const res = await client.getEntries({ content_type: 'repair' });
 
-  const items = res.items.map((item: any) => ({
-    model: item.fields.model,
-    url: item.fields.url,
-    photo: item.fields.photo,
-  }));
+    // Log to check the structure
+    console.log('Contentful response:', res.items);
 
-  return items;
-}
+    const items: Item[] = res.items.map((item: any) => {
+      console.log('Item fields:', item.fields);
+      return {
+        category: item.fields.category || '',
+        titleVideos: item.fields.titleVideos || [],
+        contentVideos: item.fields.contentVideos || [],
+        urlVideos: item.fields.urlVideos || [],
+      };
+    }).sort((a, b) => {
+      return b.category.localeCompare(a.category); // Sort alphabetically by category
+    });
 
-// Helper function to convert YouTube URL to embed URL
-function getYouTubeEmbedUrl(url: string): string {
-  const videoId = url.split('v=')[1];
-  const ampersandPosition = videoId.indexOf('&');
-  if (ampersandPosition !== -1) {
-    return `https://www.youtube.com/embed/${videoId.substring(0, ampersandPosition)}`;
+    return items;
+  } catch (error) {
+    console.error('Error fetching data from Contentful:', error);
+    return [];
   }
-  return `https://www.youtube.com/embed/${videoId}`;
 }
 
 // Main component
@@ -60,37 +58,45 @@ export default async function Home() {
 
   return (
     <>
-      <NavbarOpel/>
-      <h1 className="text-4xl font-bold text-center my-8">Opel Cars</h1>
+      <NavbarOpel />
+      <h1 className="text-4xl font-bold text-center my-8">Repair Videos</h1>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item, index) => (
-            <div key={index} className="card bg-base-100 shadow-xl">
-              <figure className="p-4">
-                {item.photo && item.photo.fields.file.url && (
-                  <Image
-                    src={`https:${item.photo.fields.file.url}`}
-                    alt={item.model}
-                    width={500}
-                    height={300}
-                    className="w-full h-48 object-cover"
-                  />
-                )}
-              </figure>
+            <div key={index} className="card bg-base-100 shadow-xl p-4">
               <div className="card-body">
-                <h2 className="card-title text-xl font-bold">{item.model}</h2>
-                {item.url && (
-                  <div className="my-4">
-                    <iframe
-                      src={getYouTubeEmbedUrl(item.url)}
-                      width="100%"
-                      height="315"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                )}
+                {item.titleVideos && item.contentVideos && item.urlVideos && item.titleVideos.map((title, titleIndex) => {
+                  const content = item.contentVideos[titleIndex] || ''; // Default to empty string if undefined
+                  const videoUrl = item.urlVideos[titleIndex] || ''; // Default to empty string if undefined
+
+                  return (
+                    <div key={titleIndex} className="mb-8">
+                      <h3 className="text-lg font-semibold mb-2">Title:</h3>
+                      <p className="text-lg mb-4">{title}</p>
+
+                      <h3 className="text-lg font-semibold mb-2">Video Content:</h3>
+                      <p className="text-base mb-4">{content}</p>
+
+                      {videoUrl && (
+                        <div className="my-4">
+                          <iframe
+                            src={videoUrl}
+                            width="100%"
+                            height="315"
+                            frameBorder="0"
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        </div>
+                      )}
+
+                      {/* Add separator only if there are more videos */}
+                      {titleIndex < (item.titleVideos.length - 1) && (
+                        <hr className="my-4" />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ))}
