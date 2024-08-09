@@ -1,6 +1,8 @@
-import { createClient } from 'contentful';
+// src/app/page.tsx
+
+import { client } from '../../lib/contentful'; // Importujemy klienta z contentful.ts
 import NavbarOpel from '../components/NavbarOpel';
-import AnimatedCard from '../components/AnimatedCard'; // Import AnimatedCard
+import AnimatedCard from '../components/ui/AnimatedCard'; // Import AnimatedCard
 
 // Item interface
 interface Item {
@@ -9,21 +11,12 @@ interface Item {
   titleVideos: string[]; // Add titleVideos to Item
 }
 
-// Contentful client setup
-const spaceId = process.env.CONTENTFUL_SPACE_ID!;
-const accessToken = process.env.CONTENTFUL_ACCESS_KEY!;
-
-const client = createClient({
-  space: spaceId,
-  accessToken: accessToken,
-});
-
 // Helper function to add delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Function to fetch data from Contentful with added delay
 async function fetchContentfulData(): Promise<Item[]> {
-  await delay(2000); // 2 seconds delay
+  await delay(1000); // 2 seconds delay
 
   try {
     const res = await client.getEntries({ content_type: 'repair' });

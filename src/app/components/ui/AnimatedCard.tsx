@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
 import {
   motion,
   useMotionTemplate,
@@ -12,14 +13,21 @@ import {
 interface AnimatedCardProps {
   category: string;
   categoryIcon: string;
-  titleVideoCount: number; // Add titleVideoCount
+  titleVideoCount: number;
 }
 
 const AnimatedCard: React.FC<AnimatedCardProps> = ({ category, categoryIcon, titleVideoCount }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    // Redirect to the dynamic route for the category
+    router.push(`/opel/category/${category}`);
+  };
+
   return (
-    <>
+    <div onClick={handleCardClick} className="cursor-pointer">
       <TiltCard category={category} categoryIcon={categoryIcon} titleVideoCount={titleVideoCount} />
-    </>
+    </div>
   );
 };
 
@@ -38,13 +46,11 @@ const TiltCard: React.FC<AnimatedCardProps> = ({ category, categoryIcon, titleVi
   const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (!ref.current) return [0, 0];
+    if (!ref.current) return;
 
     const rect = ref.current.getBoundingClientRect();
-
     const width = rect.width;
     const height = rect.height;
-
     const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
     const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
 
