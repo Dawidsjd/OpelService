@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import { client } from '../../../../lib/contentful';
 import NavbarOpel from '../../../components/NavbarOpel';
-import { HoverEffect } from '../../../components/ui/CardHoverEffect';
 
 // Interfejs Item
 interface Item {
@@ -17,15 +17,16 @@ async function fetchCategoryData(category: string): Promise<Item | null> {
       'fields.category': category,
     });
 
-    // Sprawdź, czy istnieją dane
     if (res.items.length > 0) {
-      const item = res.items[0] as any; // Typuj jako `any` na potrzeby tymczasowe
+      const item = res.items[0] as any;
+      console.log('Fetched category item:', item); // Debug: Wyświetl pobrane dane
       return {
         category: item.fields.category || '',
         categoryIcon: item.fields.categoryIcon?.fields?.file?.url || '',
-        titleVideos: Array.isArray(item.fields.titleVideos) ? item.fields.titleVideos : [], // Upewnij się, że to tablica
+        titleVideos: Array.isArray(item.fields.titleVideos) ? item.fields.titleVideos : [],
       };
     } else {
+      console.error('No items found for category:', category);
       return null;
     }
   } catch (error) {
@@ -65,19 +66,27 @@ export default async function CategoryPage({ params }: { params: { category: str
     );
   }
 
-  // Przekształć tytuły w format dla HoverEffect
-  const hoverItems = item.titleVideos.map((title, index) => ({
-    title,
-    description: title, // Możesz dostosować opis
-    link: `www.youtube.com`, // Zastąp linkiem do strony filmu, jeśli to konieczne
-  }));
-
   return (
     <>
       <NavbarOpel />
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-center my-8">{item.category} Videos</h1>
-        <HoverEffect items={hoverItems} className="py-10" />
+        <div className="flex flex-wrap justify-center gap-4 py-10">
+          {item.titleVideos.map((title, index) => (
+            <div key={index} className="w-full md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+              <Link
+                href={`/opel/category/${encodeURIComponent(category)}/${encodeURIComponent(title)}`}
+                className="block transition-transform transform hover:scale-105 cursor-pointer"
+              >
+                <div className="mockup-window bg-base-300 border">
+                  <div className="bg-base-200 flex justify-center px-6 py-24">
+                    {title}
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

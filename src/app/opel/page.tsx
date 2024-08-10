@@ -8,7 +8,8 @@ import AnimatedCard from '../components/ui/AnimatedCard'; // Import AnimatedCard
 interface Item {
   category: string;
   categoryIcon: string;
-  titleVideos: string[]; // Add titleVideos to Item
+  titleVideos: string[];
+  contentVideos: string[]; // Add titleVideos to Item
 }
 
 // Helper function to add delay
@@ -30,10 +31,14 @@ async function fetchContentfulData(): Promise<Item[]> {
         category: item.fields.category || '',
         categoryIcon: categoryIconUrl,
         titleVideos: item.fields.titleVideos || [], // Add titleVideos
+        contentVideos: item.fields.contentVideos || [], // Add titleVideos
       };
     }).sort((a, b) => {
       return b.category.localeCompare(a.category); // Sort alphabetically by category
     });
+
+    // console.log(items)
+
 
     return items;
   } catch (error) {
