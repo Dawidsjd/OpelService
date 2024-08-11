@@ -101,7 +101,7 @@ const TiltCard: React.FC<AnimatedCardProps> = ({ category, categoryIcon, titleVi
           style={{
             transform: "translateZ(50px)",
           }}
-          className="text-center text-2xl font-bold text-white"
+          className="text-center text-lg font-bold text-white"
         >
           {category}
         </p>
