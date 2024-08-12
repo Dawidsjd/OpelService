@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { client } from '../../../../lib/contentful';
 import NavbarOpel from '../../../components/NavbarOpel';
 import SkeletonCard from '../../../components/ui/SkeletonCard';
+import { IconStar } from '@tabler/icons-react';
 
 // Interfejs Item
 interface Item {
@@ -52,12 +53,16 @@ async function CategoryContent({ category }: { category: string }) {
       <h1 className="text-4xl font-bold text-center my-8">{item.category} Videos</h1>
       <div className="flex flex-wrap justify-center gap-4 py-10">
         {item.titleVideos.map((title, index) => (
-          <div key={index} className="w-full md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+          <div key={index} className="w-full md:w-1/3 lg:w-1/4 xl:w-1/4 p-4 relative">
             <Link
               href={`/opel/category/${encodeURIComponent(category)}/${encodeURIComponent(title)}`}
               className="block transition-transform transform hover:scale-105 cursor-pointer"
             >
-              <div className="mockup-window bg-base-300">
+              <div className="mockup-window bg-base-300 relative">
+                {/* IconStar in the top-right corner */}
+                <div className="absolute top-3 right-3 p-1">
+                  <IconStar size={20} className="text-gray-500 transition-colors duration-300 hover:text-yellow-500" />
+                </div>
                 <div className="bg-base-200 font-bold flex justify-center px-6 py-24">
                   {title}
                 </div>

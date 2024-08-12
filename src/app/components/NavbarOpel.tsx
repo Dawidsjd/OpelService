@@ -13,7 +13,7 @@ const NavbarOpel: React.FC = () => {
             alt="Opel Logo"
             className="h-16 w-auto mr-4" // Dostosuj wysokość i margines
           />
-          <span className="text-xl font-bold">Opel Service</span>
+          <span className="text-xl font-bold hidden md:block">Opel Service</span> {/* Ukrywa tekst na urządzeniach mobilnych */}
         </Link>
       </div>
       <div className="flex-none gap-2">

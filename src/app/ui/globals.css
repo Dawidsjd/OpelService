@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 :root {
-    color-scheme: dark; /* Wymusza jasny motyw */
+    color-scheme: dark;
 }
