@@ -51,6 +51,9 @@ async function CategoryContent({ category }: { category: string }) {
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-4xl font-bold text-center my-8">{item.category} Videos</h1>
+      <div className="flex justify-center mb-8">
+        <div className="divider w-3/5"></div>
+      </div>
       <div className="flex flex-wrap justify-center gap-4 py-10">
         {item.titleVideos.map((title, index) => (
           <div key={index} className="w-full md:w-1/3 lg:w-1/4 xl:w-1/4 p-4 relative">
@@ -61,7 +64,9 @@ async function CategoryContent({ category }: { category: string }) {
               <div className="mockup-window bg-base-300 relative">
                 {/* IconStar in the top-right corner */}
                 <div className="absolute top-3 right-3 p-1">
-                  <IconStar size={20} className="text-gray-500 transition-colors duration-300 hover:text-yellow-500" />
+                  <div className="relative lg:tooltip lg:tooltip-left" data-tip="Add to Favourite">
+                    <IconStar size={20} className="text-gray-500 transition-colors duration-300 hover:text-yellow-500" />
+                  </div>
                 </div>
                 <div className="bg-base-200 font-bold flex justify-center px-6 py-24">
                   {title}

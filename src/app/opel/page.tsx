@@ -65,19 +65,25 @@ async function RepairCategories() {
 export default function Home() {
   return (
     <>
-      <NavbarOpel />
-      <h1 className="text-4xl font-bold text-center my-8">Repair Categories</h1>
-      <Suspense fallback={
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-11">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <SkeletonCard key={index} />
-            ))}
-          </div>
-        </div>
-      }>
-        <RepairCategories />
-      </Suspense>
-    </>
+  <NavbarOpel />
+  <h1 className="text-4xl font-bold text-center my-8">Repair Categories</h1>
+
+  <div className="flex justify-center mb-8">
+    <div className="divider w-3/5"></div>
+  </div>
+  
+  <Suspense fallback={
+    <div className="container mx-auto px-4">
+      <div className="flex flex-wrap justify-center gap-11">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <SkeletonCard key={index} />
+        ))}
+      </div>
+    </div>
+  }>
+    <RepairCategories />
+  </Suspense>
+</>
+
   );
 }
