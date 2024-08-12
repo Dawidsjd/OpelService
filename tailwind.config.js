@@ -4,6 +4,9 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
     './node_modules/daisyui/dist/**/*.js',
   ],
+  daisyui: {
+    themes: ["dark"],
+  },
   theme: {
     extend: {},
   },
