@@ -15,7 +15,8 @@
     "contentful": "^10.13.1",
     "daisyui": "^4.12.10",
     "firebase": "^10.12.5",
-    "framer-motion": "^11.3.24",
+    "framer-motion": "^11.3.28",
+    "mini-svg-data-uri": "^1.4.4",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "react": "^18",
@@ -26,7 +27,6 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

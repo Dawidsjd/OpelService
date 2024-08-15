@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const NavbarOpel: React.FC = () => {
   return (
-    <div className="navbar bg-base-100 shadow-lg px-4 py-2">
+    <div className="navbar sticky top-0 left-0 right-0 shadow-2xl px-4 py-2 bg-[#14181f] z-50">
       <div className="flex-1 flex items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center">

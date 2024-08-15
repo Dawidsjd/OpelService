@@ -82,7 +82,7 @@ const TiltCard: React.FC<AnimatedCardProps> = ({ category, categoryIcon, titleVi
           transform: "translateZ(75px)",
           transformStyle: "preserve-3d",
         }}
-        className="absolute inset-4 grid place-content-center rounded-xl bg-[#1d232a] shadow-lg"
+        className="absolute inset-4 grid place-content-center rounded-xl bg-[#1d232a] bg-grid-white/[0.01] shadow-lg"
       >
         {/* Ikona kategorii */}
         <div className="flex justify-center items-center h-full">

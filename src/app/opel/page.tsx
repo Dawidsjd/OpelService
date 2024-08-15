@@ -42,7 +42,6 @@ async function fetchContentfulData(): Promise<Item[]> {
 // Komponent do renderowania kart z Contentful
 async function RepairCategories() {
   const items = await fetchContentfulData();
-  
 
   return (
     <div className="container mx-auto px-4">
@@ -65,25 +64,32 @@ async function RepairCategories() {
 export default function Home() {
   return (
     <>
-  <NavbarOpel />
-  <h1 className="text-4xl font-bold text-center my-8">Repair Categories</h1>
+      <NavbarOpel />
+      <div className="min-h-screen relative bg-[#14181f] bg-grid-white/[0.1]"> {/* Dodanie paddingu od góry */}
+        {/* Radial gradient for the container to give a faded look */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center bg-[#14181f] [mask-image:radial-gradient(ellipse_at_center,transparent_10%,#14181f)]"></div>
+        <div className="relative z-20 pt-8">
+          <h1 className="text-4xl text-center font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">
+            Repair Categories
+          </h1>
 
-  <div className="flex justify-center mb-8">
-    <div className="divider w-3/5"></div>
-  </div>
-  
-  <Suspense fallback={
-    <div className="container mx-auto px-4">
-      <div className="flex flex-wrap justify-center gap-11">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <SkeletonCard key={index} />
-        ))}
+          <div className="flex justify-center mb-8">
+            <div className="divider w-3/5"></div>
+          </div>
+
+          <Suspense fallback={
+            <div className="container mx-auto px-4">
+              <div className="flex flex-wrap justify-center gap-11">
+                {Array.from({ length: 8 }).map((_, index) => (
+                  <SkeletonCard key={index} />
+                ))}
+              </div>
+            </div>
+          }>
+            <RepairCategories />
+          </Suspense>
+        </div>
       </div>
-    </div>
-  }>
-    <RepairCategories />
-  </Suspense>
-</>
-
+    </>
   );
 }
