@@ -9,25 +9,36 @@ import {
   useSpring,
 } from "framer-motion";
 
-// Props to accept category, icon, and title video count
+// Props to accept category, icon, title video count, and index
 interface AnimatedCardProps {
   category: string;
   categoryIcon: string;
   titleVideoCount: number;
+  index?: number; // Dodanie index jako props
 }
 
-const AnimatedCard: React.FC<AnimatedCardProps> = ({ category, categoryIcon, titleVideoCount }) => {
+const AnimatedCard: React.FC<AnimatedCardProps> = ({ category, categoryIcon, titleVideoCount, index }) => {
   const router = useRouter();
 
   const handleCardClick = () => {
-    // Redirect to the dynamic route for the category
     router.push(`/opel/category/${category}`);
   };
 
   return (
-    <div onClick={handleCardClick} className="cursor-pointer">
-      <TiltCard category={category} categoryIcon={categoryIcon} titleVideoCount={titleVideoCount} />
-    </div>
+    <motion.div
+      onClick={handleCardClick}
+      className="cursor-pointer"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: index ? index * 0.1 : 0 }}
+    >
+      <TiltCard
+        category={category}
+        categoryIcon={categoryIcon}
+        titleVideoCount={titleVideoCount}
+        index={index} // Przekazanie index do TiltCard
+      />
+    </motion.div>
   );
 };
 
