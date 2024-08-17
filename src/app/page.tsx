@@ -4,32 +4,65 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Boxes } from './components/ui/BackgroundBoxes';
 import { FlipWords } from './components/ui/FlipWords';
-import { IconBrandGithub, IconBrandX, IconBrandLinkedin } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandX, IconBrandLinkedin, IconChevronDown } from '@tabler/icons-react';
 import { PinContainer } from './components/ui/3DPin';
 import { ContainerScroll } from "./components/ui/ContainerScrollAnimation";
-import Image from "next/image";
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import Loading from './loading';
+import Footer from './components/ui/Footer';
+import Waitlist from './components/ui/Waitlist';
+
 
 const HomePage: React.FC = () => {
   const words = ["Repair with Opel Service", "20+ support videos", "12+ categories", "20+ sections"];
   const [mounted, setMounted] = useState(false);
+  const [loading, setLoading] = useState(true); // Stan ładowania
 
   useEffect(() => {
-    setMounted(true);
+    // Przykład rzeczywistego ładowania: symulujemy załadowanie treści
+    const fetchData = async () => {
+      try {
+        // Jeśli masz asynchroniczne operacje, np. fetchowanie danych, wykonaj je tutaj
+        // np. await fetch('/api/data');
+        
+        // Po zakończeniu ładowania treści
+        setMounted(true);
+      } catch (error) {
+        console.error("Error loading content:", error);
+      } finally {
+        setLoading(false); // Ustaw stan na false, gdy treść jest gotowa
+      }
+    };
+
+    fetchData();
   }, []);
+
+  // Funkcja przewijająca do następnej sekcji
+  const handleScroll = () => {
+    const section = document.getElementById('next-section');
+    section?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
-      {/* Sekcja zajmująca całą wysokość okna */}
+      {loading && <Loading />} {/* Wyświetl spinner podczas ładowania */}
+      
       <div className="h-screen relative w-full overflow-hidden bg-[#1d232a] flex flex-col items-center justify-center rounded-lg">
         <div className="absolute inset-0 w-full h-full bg-[#1d232a] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
 
         <Boxes />
         {/* Dodanie logo */}
-        <img 
-          src="/logo/logo.png" 
-          alt="Logo" 
-          className="w-32 h-auto mb-6 relative z-20"
-        />
+        <div className="relative w-32 h-auto mb-6 pointer-events-none">
+          <Image 
+            src="/logo/logo.png" 
+            alt="Logo" 
+            layout="responsive" 
+            width={128} // Dopasuj szerokość
+            height={128} // Dopasuj wysokość
+            objectFit="contain" 
+          />
+        </div>
         <h1 className="relative z-10 text-5xl md:text-7xl text-center font-sans font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400 drop-shadow-lg">
           Opel Service
         </h1>
@@ -79,10 +112,26 @@ const HomePage: React.FC = () => {
             <IconBrandLinkedin size={24} />
           </Link>
         </div>
+
+        {/* Dodanie nowoczesnej animacji strzałki */}
+        <div className="absolute bottom-2 z-20 flex justify-center">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={handleScroll}
+            className="cursor-pointer"
+          >
+            <IconChevronDown 
+              size={36} 
+              className="text-white opacity-25 animate-pulse"
+            />
+          </motion.div>
+        </div>
       </div>
 
       {/* Nowa sekcja poniżej */}
-      <div className="relative w-full bg-white text-center py-8 text-black flex justify-center items-center overflow-x-hidden">
+      <div id="next-section" className="relative w-full bg-white text-center pt-8 pb-16 text-black flex justify-center items-center overflow-x-hidden">
+        {/* Treść sekcji */}
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-8">
           {/* Tekst po lewej stronie */}
           <div className="w-full md:w-1/2 p-6 md:p-8 text-center">
@@ -96,8 +145,8 @@ const HomePage: React.FC = () => {
             <div className="w-full md:w-1/2 p-6 md:p-8 flex justify-center">
               <div className="h-[15rem] w-full flex items-center justify-center sm:h-[20rem]">
                 <PinContainer
-                  title="/ui.aceternity.com"
-                  href="https://twitter.com/mannupaaji"
+                  title="opel-service.vercel.app/opel"
+                  href="/opel"
                 >
                   <div className="flex flex-col p-4 tracking-tight text-slate-100/50 w-[15rem] h-[15rem] sm:w-[20rem] sm:h-[20rem]">
                     <h3 className="font-bold text-base text-slate-100">
@@ -108,7 +157,15 @@ const HomePage: React.FC = () => {
                         Customizable Tailwind CSS and Framer Motion Components.
                       </span>
                     </div>
-                    <div className="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500" />
+                    <div className="flex flex-1 w-full rounded-lg mt-4 bg-[#2b313b] relative">
+                      <Image
+                        src="/oilIcon/oil.svg"
+                        alt="Oil Icon"
+                        layout="fill"
+                        objectFit="contain"
+                        className="rounded-lg"
+                      />
+                    </div>
                   </div>
                 </PinContainer>
               </div>
@@ -147,12 +204,22 @@ const HomePage: React.FC = () => {
         <div className="flex justify-center -mt-36 mb-8">
           <Link 
             href="/market" 
-            className="px-6 py-2 bg-[#26313c] text-white font-semibold rounded-lg shadow-md hover:bg-[#2e3a47] focus:outline-none focus:ring-2 focus:ring-[#26313c] focus:ring-opacity-75 transition"
+            className="px-6 py-2 bg-[#26313c] text-white font-semibold rounded-lg shadow-md hover:bg-[#2e3a47] focus:outline-none focus:ring-2 focus:ring-[#26313c] focus:ring-opacity-75 transition z-50"
           >
             Go to Market
           </Link>
         </div>
       </div>
+
+
+
+      <Waitlist/>
+
+            
+
+      <Footer/>
+      
+      
     </>
   );
 };
