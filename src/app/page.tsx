@@ -13,41 +13,34 @@ import Loading from './loading';
 import Footer from './components/ui/Footer';
 import Waitlist from './components/ui/Waitlist';
 
-
 const HomePage: React.FC = () => {
   const words = ["Repair with Opel Service", "20+ support videos", "12+ categories", "20+ sections"];
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true); // Stan ładowania
 
   useEffect(() => {
-    // Przykład rzeczywistego ładowania: symulujemy załadowanie treści
     const fetchData = async () => {
       try {
-        // Jeśli masz asynchroniczne operacje, np. fetchowanie danych, wykonaj je tutaj
-        // np. await fetch('/api/data');
-        
-        // Po zakończeniu ładowania treści
         setMounted(true);
       } catch (error) {
         console.error("Error loading content:", error);
       } finally {
-        setLoading(false); // Ustaw stan na false, gdy treść jest gotowa
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  // Funkcja przewijająca do następnej sekcji
   const handleScroll = () => {
-    const section = document.getElementById('next-section');
+    const section = document.getElementById('about-section');
     section?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <>
       {loading && <Loading />} {/* Wyświetl spinner podczas ładowania */}
-      
+
       <div className="h-screen relative w-full overflow-hidden bg-[#1d232a] flex flex-col items-center justify-center rounded-lg">
         <div className="absolute inset-0 w-full h-full bg-[#1d232a] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
 
@@ -58,8 +51,8 @@ const HomePage: React.FC = () => {
             src="/logo/logo.png" 
             alt="Logo" 
             layout="responsive" 
-            width={128} // Dopasuj szerokość
-            height={128} // Dopasuj wysokość
+            width={128} 
+            height={128} 
             objectFit="contain" 
           />
         </div>
@@ -77,7 +70,6 @@ const HomePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Dostosowanie przycisku */}
         <Link 
           href="/opel" 
           className="mt-6 px-6 py-2 bg-[#26313c] text-white font-semibold rounded-lg shadow-md hover:bg-[#2e3a47] focus:outline-none focus:ring-2 focus:ring-[#26313c] focus:ring-opacity-75 transition relative z-20"
@@ -85,7 +77,6 @@ const HomePage: React.FC = () => {
           Go to Opel
         </Link>
 
-        {/* Dodanie ikon społecznościowych */}
         <div className="absolute bottom-16 flex space-x-4 z-20">
           <Link 
             href="https://github.com/yourusername" 
@@ -113,7 +104,6 @@ const HomePage: React.FC = () => {
           </Link>
         </div>
 
-        {/* Dodanie nowoczesnej animacji strzałki */}
         <div className="absolute bottom-2 z-20 flex justify-center">
           <motion.div
             whileHover={{ scale: 1.1 }}
@@ -129,18 +119,37 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* Nowa sekcja poniżej */}
-      <div id="next-section" className="relative w-full bg-white text-center pt-8 pb-16 text-black flex justify-center items-center overflow-x-hidden">
-        {/* Treść sekcji */}
+      <div id="about-section" className="w-full bg-white text-black py-16">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8 px-6 md:px-0">
+          <div className="w-full md:w-1/2 p-6">
+            <Image
+              src="/about-image.jpg"
+              alt="About Us"
+              width={600}
+              height={400}
+              className="rounded-lg object-cover shadow-lg"
+            />
+          </div>
+          <div className="w-full md:w-1/2 p-6 text-center md:text-left">
+            <h2 className="text-3xl font-bold mb-4">About Opel Service</h2>
+            <p className="text-lg leading-relaxed">
+              At Opel Service, we pride ourselves on providing top-notch repair services with over 20+ support videos, 12+ categories, and 20+ sections dedicated to helping you maintain and repair your Opel vehicle. Our dedicated team ensures you get the best advice, tools, and services needed to keep your car in perfect condition.
+            </p>
+            <p className="text-lg leading-relaxed mt-4">
+              Whether you are looking for professional repair services or need detailed guides on how to do it yourself, Opel Service is your go-to platform. Join our community of satisfied customers today!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="next-section" className="relative w-full bg-slate-200 text-center pt-8 pb-16 text-black flex justify-center items-center overflow-x-hidden">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-8">
-          {/* Tekst po lewej stronie */}
           <div className="w-full md:w-1/2 p-6 md:p-8 text-center">
             <h2 className="text-2xl font-semibold mb-4">Lorem Ipsum</h2>
             <p className="text-lg m-5 sm:m-0">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
-          {/* Komponent 3DPin po prawej stronie */}
           {mounted && (
             <div className="w-full md:w-1/2 p-6 md:p-8 flex justify-center">
               <div className="h-[15rem] w-full flex items-center justify-center sm:h-[20rem]">
@@ -174,7 +183,6 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* Nowa sekcja z HeroScrollDemo */}
       <div className="relative w-full bg-gray-100 text-center pb-16">
         <div className="flex flex-col overflow-hidden">
           <ContainerScroll
@@ -200,7 +208,6 @@ const HomePage: React.FC = () => {
           </ContainerScroll>
         </div>
 
-        {/* Przycisk Go to Market */}
         <div className="flex justify-center -mt-36 mb-8">
           <Link 
             href="/market" 
@@ -211,15 +218,59 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
+ {/* Zaktualizowana sekcja z boxami */}
+<div id="technologies-section" className="w-full bg-[#1d232a] text-white py-16">
+  <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-6 px-6 text-center">
+    <h2 className="text-3xl font-bold mb-8 w-full">Użyte Technologie</h2>
+
+    {/* Box z Next.js */}
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
+      <h3 className="text-xl font-semibold mb-2">Next.js</h3>
+      <p className="text-base leading-relaxed">
+        Framework do budowania aplikacji React.
+      </p>
+    </div>
+
+    {/* Box z Tailwind CSS */}
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
+      <h3 className="text-xl font-semibold mb-2">Tailwind CSS</h3>
+      <p className="text-base leading-relaxed">
+        Narzędzie do stylizacji CSS opierające się na utility-first.
+      </p>
+    </div>
+
+    {/* Box z Framer Motion */}
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
+      <h3 className="text-xl font-semibold mb-2">Framer Motion</h3>
+      <p className="text-base leading-relaxed">
+        Biblioteka do animacji w React.
+      </p>
+    </div>
+
+    {/* Box z TypeScript */}
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
+      <h3 className="text-xl font-semibold mb-2">TypeScript</h3>
+      <p className="text-base leading-relaxed">
+        Superset JavaScriptu, który dodaje typy statyczne.
+      </p>
+    </div>
+
+    {/* Box z Tabler Icons */}
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
+      <h3 className="text-xl font-semibold mb-2">Tabler Icons</h3>
+      <p className="text-base leading-relaxed">
+        Zestaw nowoczesnych ikon open-source.
+      </p>
+    </div>
+  </div>
+</div>
 
 
-      <Waitlist/>
 
-            
 
-      <Footer/>
-      
-      
+
+      <Waitlist />
+      <Footer />
     </>
   );
 };
