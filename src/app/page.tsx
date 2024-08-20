@@ -15,7 +15,8 @@ import { IconBrandGithub,
          IconIcons,
         IconBrandVercel, 
         IconBrandFirebase,
-        IconBrandReact} from '@tabler/icons-react';
+        IconBrandReact,
+        IconBrandBing} from '@tabler/icons-react';
 
 import { PinContainer } from './components/ui/3DPin';
 import { ContainerScroll } from "./components/ui/ContainerScrollAnimation";
@@ -135,7 +136,7 @@ const HomePage: React.FC = () => {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8 px-6 md:px-0">
           <div className="w-full md:w-1/2 p-6">
             <Image
-              src="/about-image.jpg"
+              src="/aboutGraphic/opel_PixelArt.jpg"
               alt="About Us"
               width={600}
               height={400}
@@ -277,8 +278,15 @@ const HomePage: React.FC = () => {
 
     <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
       <IconBrandReact className="text-white mb-4" size={48} />
-      <h3 className="text-xl font-semibold">Firebase</h3>
+      <h3 className="text-xl font-semibold">React</h3>
     </div>
+
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandBing className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Bing AI</h3>
+    </div>
+
+    
 
     
 
