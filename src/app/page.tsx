@@ -4,7 +4,19 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Boxes } from './components/ui/BackgroundBoxes';
 import { FlipWords } from './components/ui/FlipWords';
-import { IconBrandGithub, IconBrandX, IconBrandLinkedin, IconChevronDown } from '@tabler/icons-react';
+import { IconBrandGithub,
+   IconBrandX,
+    IconBrandLinkedin,
+     IconChevronDown,
+      IconBrandNextjs,
+      IconBrandTailwind,
+       IconBrandFramer,
+        IconBrandTypescript,
+         IconIcons,
+        IconBrandVercel, 
+        IconBrandFirebase,
+        IconBrandReact} from '@tabler/icons-react';
+
 import { PinContainer } from './components/ui/3DPin';
 import { ContainerScroll } from "./components/ui/ContainerScrollAnimation";
 import Image from 'next/image';
@@ -224,44 +236,52 @@ const HomePage: React.FC = () => {
     <h2 className="text-3xl font-bold mb-8 w-full">Użyte Technologie</h2>
 
     {/* Box z Next.js */}
-    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
-      <h3 className="text-xl font-semibold mb-2">Next.js</h3>
-      <p className="text-base leading-relaxed">
-        Framework do budowania aplikacji React.
-      </p>
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandNextjs className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Next.js</h3>
     </div>
 
     {/* Box z Tailwind CSS */}
-    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
-      <h3 className="text-xl font-semibold mb-2">Tailwind CSS</h3>
-      <p className="text-base leading-relaxed">
-        Narzędzie do stylizacji CSS opierające się na utility-first.
-      </p>
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandTailwind className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Tailwind CSS</h3>
     </div>
 
     {/* Box z Framer Motion */}
-    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
-      <h3 className="text-xl font-semibold mb-2">Framer Motion</h3>
-      <p className="text-base leading-relaxed">
-        Biblioteka do animacji w React.
-      </p>
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandFramer className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Framer Motion</h3>
     </div>
 
     {/* Box z TypeScript */}
-    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
-      <h3 className="text-xl font-semibold mb-2">TypeScript</h3>
-      <p className="text-base leading-relaxed">
-        Superset JavaScriptu, który dodaje typy statyczne.
-      </p>
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandTypescript className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">TypeScript</h3>
     </div>
 
     {/* Box z Tabler Icons */}
-    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)]">
-      <h3 className="text-xl font-semibold mb-2">Tabler Icons</h3>
-      <p className="text-base leading-relaxed">
-        Zestaw nowoczesnych ikon open-source.
-      </p>
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconIcons className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Tabler Icons</h3>
     </div>
+
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandVercel className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Vercel</h3>
+    </div>
+
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandFirebase className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Firebase</h3>
+    </div>
+
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandReact className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Firebase</h3>
+    </div>
+
+    
+
   </div>
 </div>
 
