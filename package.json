@@ -11,11 +11,13 @@
   "dependencies": {
     "@next-auth/firebase-adapter": "^2.0.1",
     "@tabler/icons-react": "^3.12.0",
+    "@types/lodash.debounce": "^4.0.9",
     "clsx": "^2.1.1",
     "contentful": "^10.13.1",
     "daisyui": "^4.12.10",
     "firebase": "^10.12.5",
     "framer-motion": "^11.3.28",
+    "lodash.debounce": "^4.0.8",
     "mini-svg-data-uri": "^1.4.4",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
