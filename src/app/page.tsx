@@ -16,7 +16,8 @@ import { IconBrandGithub,
         IconBrandVercel, 
         IconBrandFirebase,
         IconBrandReact,
-        IconBrandBing} from '@tabler/icons-react';
+        IconBrandBing,
+        IconBrandGoogle} from '@tabler/icons-react';
 
 import { PinContainer } from './components/ui/3DPin';
 import { ContainerScroll } from "./components/ui/ContainerScrollAnimation";
@@ -286,6 +287,10 @@ const HomePage: React.FC = () => {
       <h3 className="text-xl font-semibold">Bing AI</h3>
     </div>
 
+    <div className="bg-[#26313c] p-6 rounded-lg shadow-md hover:bg-[#2e3a47] transition w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33%-1.5rem)] lg:w-[calc(25%-1rem)] flex flex-col items-center">
+      <IconBrandGoogle className="text-white mb-4" size={48} />
+      <h3 className="text-xl font-semibold">Contentful API</h3>
+    </div>
     
 
     
