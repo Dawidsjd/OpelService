@@ -13,6 +13,7 @@ const AboutSection: React.FC = () => {
             width={600}
             height={400}
             className="rounded-lg object-cover shadow-lg"
+            loading='lazy'
           />
         </div>
         <div className="w-full md:w-1/2 p-6 text-center md:text-left">

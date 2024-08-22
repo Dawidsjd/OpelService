@@ -20,7 +20,7 @@ const ScrollAnimatedSection: React.FC = () => {
           }
         >
           <Image
-            src={`/vercel.svg`}
+            src={`/DeviceBackground/Categories.png`}
             alt="hero"
             height={720}
             width={1400}

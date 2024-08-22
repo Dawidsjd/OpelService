@@ -1,5 +1,10 @@
 "use client";
 
+import { IconBrandGoogle, IconBrandGithub } from '@tabler/icons-react';
+import Link from 'next/link';
+import { signIn } from "next-auth/react";
+
+
 const LogIn = () => {
   return (
     <div className="bg-[#1d232a] dark:bg-gray-900">
@@ -8,8 +13,8 @@ const LogIn = () => {
           className="hidden bg-cover lg:block lg:w-2/3"
           style={{
             backgroundImage: 'url(/aboutGraphic/opel_PixelArt.jpg)',
-            backgroundPosition: 'center 70%', // Adjust this as needed
-            backgroundSize: 'cover', // Ensures the image covers the element
+            backgroundPosition: 'center 70%',
+            backgroundSize: 'cover',
           }}
         >
           <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
@@ -28,7 +33,7 @@ const LogIn = () => {
               <img 
                 src="/logo/logo.png" 
                 alt="Brand Logo" 
-                className="mx-auto h-28" // mx-auto centers the image horizontally
+                className="mx-auto h-28"
               />
               <p className="mt-3 text-gray-500 dark:text-gray-300">Log in to access your account</p>
             </div>
@@ -69,8 +74,34 @@ const LogIn = () => {
                 </div>
               </form>
 
+              <div className="my-6 flex items-center justify-center">
+                <div className="border-t border-gray-300 w-full"></div>
+                <span className="mx-4 text-gray-400">OR</span>
+                <div className="border-t border-gray-300 w-full"></div>
+              </div>
+
+              <div className="mt-6 space-y-4">
+                <button
+                onClick={() => signIn('google')}
+                  className="w-full flex items-center justify-center px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:bg-red-500 focus:ring focus:ring-red-400 focus:ring-opacity-50"
+                >
+                  <IconBrandGoogle className="h-5 w-5 mr-2" />
+                  Log in with Google
+                </button>
+
+                <button
+                  className="w-full flex items-center justify-center px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:ring focus:ring-gray-600 focus:ring-opacity-50"
+                >
+                  <IconBrandGithub className="h-5 w-5 mr-2" />
+                  Log in with GitHub
+                </button>
+              </div>
+
               <p className="mt-6 text-sm text-center text-gray-400">
-                Don&#x27;t have an account yet? <a href="#" className="text-blue-500 focus:outline-none focus:underline hover:underline">Sign up</a>.
+                Don&#x27;t have an account yet?{' '}
+                <Link href="/sign-in" className="text-blue-500 focus:outline-none focus:underline hover:underline">
+                   Sign up
+                </Link>.
               </p>
             </div>
           </div>
