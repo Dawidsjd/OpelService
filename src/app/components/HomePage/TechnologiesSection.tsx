@@ -11,6 +11,7 @@ const IconBrandFirebase = React.lazy(() => import('@tabler/icons-react').then(mo
 const IconBrandReact = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandReact })));
 const IconBrandBing = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandBing })));
 const IconBrandGoogle = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandGoogle })));
+const IconKey = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconKey })));
 
 interface Technology {
   icon: React.ComponentType<{ size?: number; className?: string }> | React.ComponentType<any>;
@@ -28,6 +29,7 @@ const technologies: Technology[] = [
   { icon: IconBrandReact as React.ComponentType<any>, name: 'React' },
   { icon: IconBrandBing as React.ComponentType<any>, name: 'Bing AI' },
   { icon: IconBrandGoogle as React.ComponentType<any>, name: 'Contentful API' },
+  { icon: IconKey as React.ComponentType<any>, name: 'NextAuth.js' },
 ];
 
 const TechnologiesSection: React.FC = () => {
