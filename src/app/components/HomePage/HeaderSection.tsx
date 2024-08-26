@@ -28,7 +28,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ words, handleScroll }) =>
       <div className="h-screen relative w-full overflow-hidden bg-[#1d232a] flex flex-col items-center justify-center rounded-lg">
         <div className="absolute inset-0 w-full h-full bg-[#1d232a] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
         <Boxes />
-        <div className="relative w-32 h-auto mb-6 pointer-events-none">
+        <div className="relative w-32 h-auto mb-6 pointer-events-none select-none">
           <Image
             src="/logo/logo.png"
             alt="Logo"

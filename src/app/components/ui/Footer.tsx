@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer footer-center bg-[#1d232a] text-neutral-content p-10">
       <aside>
         {/* Zastąpione SVG logo z użyciem komponentu Image */}
-        <div className="relative inline-block w-28 h-28 opacity-40 pointer-events-none">
+        <div className="relative inline-block w-28 h-28 opacity-40 pointer-events-none select-none">
           <Image 
             src="/logo/logo.png" 
             alt="Logo" 

@@ -24,7 +24,7 @@ const ScrollAnimatedSection: React.FC = () => {
             alt="hero"
             height={720}
             width={1400}
-            className="mx-auto rounded-2xl object-cover h-full object-left-top"
+            className="mx-auto rounded-2xl object-cover h-full object-left-top select-none"
             draggable={false}
           />
         </ContainerScroll>
