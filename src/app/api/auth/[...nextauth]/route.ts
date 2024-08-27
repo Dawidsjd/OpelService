@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import prisma from '@/lib/prisma'; // Importuj Prisma Client z pliku `lib/prisma.ts`
 
 const handler = NextAuth({
   providers: [
@@ -13,23 +12,13 @@ const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user }) {
-      if (user?.email) {
-        const existingUser = await prisma.user.findUnique({
-          where: { email: user.email },
-        });
-
-        if (!existingUser) {
-          await prisma.user.create({
-            data: {
-              email: user.email,
-            },
-          });
-        }
-      }
-      return true;
+      // Możesz dodać dowolną logikę tutaj, ale bez interakcji z bazą danych, 
+      // na przykład sprawdzanie czy użytkownik ma odpowiedni email
+      return true;  // Jeśli chcesz zezwolić na logowanie dla wszystkich użytkowników
     },
     async session({ session }) {
-      return session;
+      // Możesz dodać dowolną logikę związaną z sesją
+      return session; // Na przykład zwrócenie całej sesji
     },
   },
 });
