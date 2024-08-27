@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { sql } from '@vercel/postgres'; // Importujemy moduł do zapytań SQL
 
 const handler = NextAuth({
   providers: [
@@ -7,18 +8,32 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
     }),
-    // Możesz dodać więcej providerów tutaj
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user }) {
-      // Możesz dodać dowolną logikę tutaj, ale bez interakcji z bazą danych, 
-      // na przykład sprawdzanie czy użytkownik ma odpowiedni email
-      return true;  // Jeśli chcesz zezwolić na logowanie dla wszystkich użytkowników
+      try {
+        if (user?.email) {
+          // Sprawdzamy, czy użytkownik istnieje w bazie danych
+          const existingUser = await sql`
+            SELECT * FROM Users WHERE email = ${user.email};
+          `;
+
+          if (existingUser.rows.length === 0) {
+            // Jeśli użytkownik nie istnieje, dodajemy go do bazy danych
+            await sql`
+              INSERT INTO Users (email) VALUES (${user.email});
+            `;
+          }
+        }
+        return true;  // Pozwalamy na logowanie
+      } catch (error) {
+        console.error('Error during sign in:', error);
+        return false; // W przypadku błędu blokujemy logowanie
+      }
     },
     async session({ session }) {
-      // Możesz dodać dowolną logikę związaną z sesją
-      return session; // Na przykład zwrócenie całej sesji
+      return session; // Zwracamy sesję
     },
   },
 });
