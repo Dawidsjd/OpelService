@@ -1,48 +1,83 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { IconStar } from '@tabler/icons-react';
+import { IconStar, IconStarFilled } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
-import { useSession } from 'next-auth/react'; // Importujemy useSession
+import { useSession } from 'next-auth/react';
 
 interface MockupWindowProps {
   category: string;
   title: string;
   index: number;
+  initialIsFavourite: boolean; // Zmieniono nazwę na initialIsFavourite
 }
 
-const MockupWindow: React.FC<MockupWindowProps> = ({ category, title, index }) => {
-  const { data: session } = useSession(); // Uzyskujemy sesję
+const MockupWindow: React.FC<MockupWindowProps> = ({ category, title, index, initialIsFavourite }) => {
+  const { data: session } = useSession();
+  const [isFavourited, setIsFavourited] = useState(initialIsFavourite);
   const animationDelay = index * 0.1;
+
+  // Efekt do załadowania stanu ulubionych z serwera
+  useEffect(() => {
+    const fetchFavouriteStatus = async () => {
+      if (!session || !session.user || !session.user.email) return;
+      
+      try {
+        const response = await fetch('/api/favourites/status', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: session.user.email,
+            title,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setIsFavourited(data.isFavourite);
+        }
+      } catch (error) {
+        console.error("Error fetching favourite status:", error);
+      }
+    };
+
+    fetchFavouriteStatus();
+  }, [session, title]);
 
   const handleStarClick = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.preventDefault();
-  
+    
     if (!session || !session.user || !session.user.email) {
       console.log("User not logged in or session user is undefined.");
       return;
     }
-  
+
     try {
       const response = await fetch('/api/favourites', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId: session.user.email, title }), // Przesyłamy email, a nie ID
+        body: JSON.stringify({
+          email: session.user.email,
+          title,
+          action: isFavourited ? 'remove' : 'add',
+        }),
       });
-  
+
       if (!response.ok) {
-        throw new Error("Failed to add to favourites.");
+        throw new Error("Failed to update favourites.");
       }
-  
-      console.log(`Added to favourites: ${title}`);
+
+      setIsFavourited(!isFavourited);
+      console.log(`${isFavourited ? 'Removed from' : 'Added to'} favourites: ${title}`);
     } catch (error) {
-      console.error("Error adding to favourites:", error);
+      console.error("Error updating favourites:", error);
     }
   };
-  
 
   return (
     <motion.div
@@ -59,10 +94,14 @@ const MockupWindow: React.FC<MockupWindowProps> = ({ category, title, index }) =
           <div className="absolute top-3 right-3 p-1">
             <div
               className="relative lg:tooltip lg:tooltip-left"
-              data-tip="Add to Favourite"
+              data-tip={isFavourited ? "Remove from Favourite" : "Add to Favourite"}
               onClick={handleStarClick}
             >
-              <IconStar size={20} className="text-gray-500 transition-colors duration-300 hover:text-yellow-500" />
+              {isFavourited ? (
+                <IconStarFilled size={20} className="text-yellow-500 transition-colors duration-300" />
+              ) : (
+                <IconStar size={20} className="text-gray-500 transition-colors duration-300 hover:text-yellow-500" />
+              )}
             </div>
           </div>
           <div className="bg-base-200 font-bold flex justify-center px-6 py-24">
