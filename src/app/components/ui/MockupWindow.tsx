@@ -10,7 +10,7 @@ interface MockupWindowProps {
   category: string;
   title: string;
   index: number;
-  initialIsFavourite: boolean; // Zmieniono nazwę na initialIsFavourite
+  initialIsFavourite?: boolean; // Zmieniono nazwę na initialIsFavourite
 }
 
 const MockupWindow: React.FC<MockupWindowProps> = ({ category, title, index, initialIsFavourite }) => {
