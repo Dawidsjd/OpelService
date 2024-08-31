@@ -10,11 +10,14 @@ import CategorySection from './components/HomePage/CategorySection';
 import ScrollAnimatedSection from './components/HomePage/ScrollAnimatedSection';
 import TechnologiesSection from './components/HomePage/TechnologiesSection';
 import { TimelineSection } from './components/HomePage/TimeLineSection';
+import SponsorSlider from './components/ui/SponsorSlider';
 
 const HomePage: React.FC = () => {
 
   const words = ["Repair with Opel Service", "20+ support videos", "12+ categories", "20+ sections"];
   const [mounted, setMounted] = useState(false);
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +41,10 @@ const HomePage: React.FC = () => {
 
     <Suspense fallback={<Loading />}>
       <HeaderSection words={words} handleScroll={handleScroll} />
+      <SponsorSlider/>
       <TimelineSection/>
       <ScrollAnimatedSection />
+      
       {/* <AboutSection /> */}
       {/* <CategorySection mounted={mounted} /> */}
       <TechnologiesSection />
