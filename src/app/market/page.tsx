@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarOpel from '../components/NavbarOpel'
+import NavbarOpel from '../components/Navbar/NavbarOpel'
 import { IconShoppingBagExclamation } from '@tabler/icons-react'
 
 const page = () => {

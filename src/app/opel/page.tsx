@@ -2,7 +2,7 @@
 
 import React, { Suspense } from 'react';
 import { client } from '../../lib/contentful';
-import NavbarOpel from '../components/NavbarOpel';
+import NavbarOpel from '../components/Navbar/NavbarOpel';
 import AnimatedCard from '../components/ui/AnimatedCard';
 import SkeletonCard from '../components/ui/SkeletonCard';
 

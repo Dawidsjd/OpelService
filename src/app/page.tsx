@@ -9,6 +9,7 @@ import AboutSection from './components/HomePage/AboutSection';
 import CategorySection from './components/HomePage/CategorySection';
 import ScrollAnimatedSection from './components/HomePage/ScrollAnimatedSection';
 import TechnologiesSection from './components/HomePage/TechnologiesSection';
+import { TimelineSection } from './components/HomePage/TimeLineSection';
 
 const HomePage: React.FC = () => {
 
@@ -28,7 +29,7 @@ const HomePage: React.FC = () => {
   }, []);
 
   const handleScroll = () => {
-    const section = document.getElementById('about-section');
+    const section = document.getElementById('timeline-section');
     section?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -37,9 +38,10 @@ const HomePage: React.FC = () => {
 
     <Suspense fallback={<Loading />}>
       <HeaderSection words={words} handleScroll={handleScroll} />
-      <AboutSection />
-      <CategorySection mounted={mounted} />
+      <TimelineSection/>
       <ScrollAnimatedSection />
+      {/* <AboutSection /> */}
+      {/* <CategorySection mounted={mounted} /> */}
       <TechnologiesSection />
       <Waitlist />
       <Footer />

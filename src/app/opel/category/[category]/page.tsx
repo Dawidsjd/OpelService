@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
 import { client } from '../../../../lib/contentful';
-import NavbarOpel from '../../../components/NavbarOpel';
+import NavbarOpel from '../../../components/Navbar/NavbarOpel';
 import SkeletonCard from '../../../components/ui/SkeletonCard';
 import MockupWindow from '../../../components/ui/MockupWindow'; // Import nowego komponentu
 

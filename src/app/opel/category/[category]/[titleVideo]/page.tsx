@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { client } from '../../../../../lib/contentful';
-import NavbarOpel from '../../../../components/NavbarOpel';
+import NavbarOpel from '../../../../components/Navbar/NavbarOpel';
 import Loading from '@/app/loading';
 // Interfejs Item
 interface Item {
