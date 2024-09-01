@@ -11,6 +11,7 @@ import ScrollAnimatedSection from './components/HomePage/ScrollAnimatedSection';
 import TechnologiesSection from './components/HomePage/TechnologiesSection';
 import { TimelineSection } from './components/HomePage/TimeLineSection';
 import SponsorSlider from './components/ui/SponsorSlider';
+import NavbarHomePage from './components/Navbar/NavbarHomePage';
 
 const HomePage: React.FC = () => {
 
@@ -40,6 +41,7 @@ const HomePage: React.FC = () => {
     <>
 
     <Suspense fallback={<Loading />}>
+      <NavbarHomePage />
       <HeaderSection words={words} handleScroll={handleScroll} />
       <SponsorSlider/>
       <TimelineSection/>

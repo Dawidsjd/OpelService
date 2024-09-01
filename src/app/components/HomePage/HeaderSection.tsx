@@ -32,7 +32,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ words, handleScroll }) =>
         <div className="absolute inset-0 w-full h-full bg-[#1d232a] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
         
         {/* Content */}
-        <div className="relative w-32 h-auto mb-6 pointer-events-none select-none z-30">
+        {/* <div className="relative w-32 h-auto mb-6 pointer-events-none select-none z-30">
           <Image
             src="/logo/logo.png"
             alt="Logo"
@@ -41,7 +41,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ words, handleScroll }) =>
             height={128}
             objectFit="contain"
           />
-        </div>
+        </div> */}
         <h1 className="relative z-30 text-5xl md:text-7xl text-center font-sans font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400 drop-shadow-lg">
           Opel Service
         </h1>
@@ -58,7 +58,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ words, handleScroll }) =>
           href="/opel"
           className="mt-6 px-6 py-2 bg-[#26313c] text-white font-semibold rounded-lg shadow-md hover:bg-[#2e3a47] focus:outline-none focus:ring-2 focus:ring-[#26313c] focus:ring-opacity-75 transition relative z-30"
         >
-          Go to Opel
+          Explore
         </Link>
         <div className="absolute bottom-16 flex space-x-4 z-30">
           <Link

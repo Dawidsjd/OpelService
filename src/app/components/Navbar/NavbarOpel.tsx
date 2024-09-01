@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useSession, signOut } from "next-auth/react";
 import { IconMenu2 } from '@tabler/icons-react'; // Import ikony hamburgera
 import { IconX } from '@tabler/icons-react'; // Import ikony zamknięcia
+import Image from 'next/image';
 
 const NavbarOpel: React.FC = () => {
   const { data: session } = useSession();
@@ -14,6 +15,8 @@ const NavbarOpel: React.FC = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  console.log(session?.user?.image)
 
   return (
     <div className="navbar sticky top-0 left-0 right-0 shadow-2xl px-4 py-2 bg-[#14181f] z-50">
@@ -51,11 +54,14 @@ const NavbarOpel: React.FC = () => {
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full shadow-md">
-                <img
-                  alt="Profile Avatar"
-                  // Jeśli użytkownik jest zalogowany, pokaż jego zdjęcie profilowe, w przeciwnym razie domyślne
-                  src={session?.user?.image || "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"}
-                />
+              <Image
+                src={session?.user?.image || "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"}
+                alt="Profile Avatar"
+                width={50} // Szerokość obrazu
+                height={50} // Wysokość obrazu
+                className="rounded-full" // Klasa CSS dla stylizacji, np. zaokrąglenie
+                priority // Dodaje priorytet dla ładowania obrazu, jeśli jest to ważne
+              />
               </div>
             </div>
             <ul

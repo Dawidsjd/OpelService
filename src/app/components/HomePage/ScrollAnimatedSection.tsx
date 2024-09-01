@@ -33,7 +33,7 @@ const ScrollAnimatedSection: React.FC = () => {
       <div className="flex justify-center -mt-52 mb-8">
         <Link
           href="/market"
-          className="px-6 py-2 bg-[#26313c] text-white font-semibold rounded-lg shadow-md hover:bg-[#2e3a47] focus:outline-none focus:ring-2 focus:ring-[#26313c] focus:ring-opacity-75 transition z-50"
+          className="px-6 py-2 bg-[#26313c] text-white font-semibold rounded-lg shadow-md hover:bg-[#2e3a47] focus:outline-none focus:ring-2 focus:ring-[#26313c] focus:ring-opacity-75 transition"
         >
           Go to Market
         </Link>
