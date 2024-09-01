@@ -20,7 +20,7 @@ const NavbarHomePage = () => {
   }, []);
 
   return (
-    <div className={`navbar fixed ${scrolled ? 'navbar-scrolled bg-[#141a1e] text-white' : 'top-10 bg-base-100 max-w-screen-xl left-1/2 transform -translate-x-1/2'} left-0 right-0 z-50 transition-all duration-300`}>
+    <div className={`navbar fixed  ${scrolled ? 'top-0 bg-[#141a1e] text-white shadow-lg' : 'top-0 xl:top-10 bg-base-100 max-w-screen-xl left-1/2 transform -translate-x-1/2'}  left-0 right-0 z-50 transition-all duration-300`}>
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
