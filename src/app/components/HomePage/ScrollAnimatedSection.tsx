@@ -6,6 +6,7 @@ import { ContainerScroll } from '../ui/ContainerScrollAnimation';
 const ScrollAnimatedSection: React.FC = () => {
   return (
     <div className="relative w-full bg-gray-100 text-center pb-16">
+      
       <div className="flex flex-col overflow-hidden">
         <ContainerScroll
           titleComponent={

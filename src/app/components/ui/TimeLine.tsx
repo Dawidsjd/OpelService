@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
+
 interface TimelineEntry {
   title: string;
   content: React.ReactNode;
@@ -41,14 +42,28 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center bg-[#141a1e] [mask-image:radial-gradient(ellipse_at_center,transparent_10%,#14181f)]"></div>
      
       <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
+      <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: false }}
+        >
         <h2 className="text-lg md:text-4xl mb-4 max-w-4xl font-sans font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400 drop-shadow-lg pb-1">
         About Opel Service
         </h2>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: false }}
+        >
         <p className="text-gray-300 dark:text-gray-400 text-sm md:text-base max-w">
         At Opel Service, we pride ourselves on providing top-notch repair services with over 20+ support videos, 12+ categories, and 20+ sections dedicated to helping you maintain and repair your Opel vehicle. Our dedicated team ensures you get the best advice, tools, and services needed to keep your car in perfect condition.
 
 Whether you are looking for professional repair services or need detailed guides on how to do it yourself, Opel Service is your go-to platform. Join our community of satisfied customers today!
         </p>
+        </motion.div>
       </div>
 
        <div ref={ref} className="relative max-w-7xl mx-auto pb-20 ">
@@ -61,9 +76,16 @@ Whether you are looking for professional repair services or need detailed guides
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-[#141a1e] dark:bg-black flex items-center justify-center">
                 <div className="h-4 w-4 rounded-full bg-gray-400 dark:bg-gray-500 border border-gray-300 dark:border-gray-700 p-2" />
               </div>
+              <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          viewport={{ once: false }}
+        >
               <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-sans font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400 drop-shadow-lg pb-2">
                 {item.title}
               </h3>
+              </motion.div>
             </div>
 
             <div className="relative pl-20 pr-4 md:pl-4 w-full">

@@ -11,10 +11,3 @@
     transition: top 0.3s ease, width 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .navbar-scrolled {
-    top: 0;
-    width: 100vw;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-  
-  
