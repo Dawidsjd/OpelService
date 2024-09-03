@@ -26,6 +26,9 @@ module.exports = {
       boxShadow: {
         'custom-shadow': '0 4px 8px rgba(0, 0, 0, 0.3)',
       },
+      screens: {
+        'xs': '350px', // Dodanie niestandardowego breakpointu dla 320px
+      },
     },
   },
   daisyui: {

@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import BackgroundVideo from '../ui/BackgroundVideo';  // Import komponentu BackgroundVideo
 import { FlipWords } from '../ui/FlipWords';
-import { IconBrandGithub, IconBrandX, IconBrandLinkedin, IconChevronDown } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandX, IconBrandLinkedin, IconChevronDown, IconChevronRight } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Loading from '@/app/loading';
 
@@ -32,16 +31,6 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ words, handleScroll }) =>
         <div className="absolute inset-0 w-full h-full bg-[#1d232a] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
         
         {/* Content */}
-        {/* <div className="relative w-32 h-auto mb-6 pointer-events-none select-none z-30">
-          <Image
-            src="/logo/logo.png"
-            alt="Logo"
-            layout="responsive"
-            width={128}
-            height={128}
-            objectFit="contain"
-          />
-        </div> */}
         <h1 className="relative z-30 text-5xl md:text-7xl text-center font-sans font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400 drop-shadow-lg">
           Opel Service
         </h1>
@@ -54,12 +43,28 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ words, handleScroll }) =>
             <br />
           </div>
         </div>
-        <Link
-          href="/opel"
-          className="mt-6 px-6 py-2 bg-[#26313c] text-white font-semibold rounded-lg shadow-md hover:bg-[#2e3a47] focus:outline-none focus:ring-2 focus:ring-[#26313c] focus:ring-opacity-75 transition relative z-30"
-        >
-          Explore
-        </Link>
+
+        {/* Buttons */}
+        <div className="relative z-30 flex flex-col text-center xs:flex-row space-y-4 xs:space-y-0 xs:space-x-4 mt-6">
+          <div
+            className="relative px-8 py-3 font-semibold text-white border border-neutral-100 hover:border-[#1d232a] rounded-lg overflow-hidden group cursor-pointer"
+            onClick={handleScroll}
+          >
+            <span className="absolute inset-0 bg-[#1d232a] transform -translate-x-full transition-transform duration-300 group-hover:translate-x-0"></span>
+            <span className="relative z-10">Explore</span>
+          </div>
+          <Link
+            href="/opel"
+            className="relative px-8 py-3 font-semibold text-white border border-neutral-100 hover:border-[#1d232a] rounded-lg overflow-hidden group"
+          >
+            <span className="absolute inset-0 bg-[#1d232a] transform -translate-x-full transition-transform duration-300 group-hover:translate-x-0"></span>
+            <span className="relative z-10 flex items-center">
+              Go to Tutorials
+              <IconChevronRight size={20} className="ml-2" />
+            </span>
+          </Link>
+        </div>
+
         <div className="absolute bottom-16 flex space-x-4 z-30">
           <Link
             href="https://github.com/yourusername"
