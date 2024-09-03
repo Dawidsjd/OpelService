@@ -26,7 +26,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ words, handleScroll }) =>
       {loading && <Loading />}
       <div className="h-screen relative w-full overflow-hidden bg-[#1d232a] flex flex-col items-center justify-center rounded-lg">
         {/* Background Video */}
-        <BackgroundVideo src="/videos/opel_background.mp4" blurAmount={15} />
+        <BackgroundVideo src="/videos/opel_background.mp4" blurAmount={5} />
 
         {/* Overlay */}
         <div className="absolute inset-0 w-full h-full bg-[#1d232a] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />

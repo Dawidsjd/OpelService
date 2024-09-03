@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image"; 
+import Image from "next/image";
 
 const NavbarHomePage = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -23,10 +23,11 @@ const NavbarHomePage = () => {
     <div
       className={`navbar fixed transition-all duration-300 ease-in-out ${
         scrolled
-          ? "top-0 bg-[#141a1e] text-white shadow-custom-shadow max-w-full"
-          : "top-0 xl:top-10 bg-base-100 max-w-screen-xl left-1/2 transform -translate-x-1/2"
-      } left-0 right-0 z-50`}
+          ? "top-0 bg-[#141a1e] text-white shadow-custom-shadow width-animation width-animation-active"
+          : "top-0 xl:top-10 bg-base-100 width-animation width-animation-inactive"
+      } max-w-screen-xl left-1/2 transform -translate-x-1/2 z-50`}
     >
+
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -63,11 +64,11 @@ const NavbarHomePage = () => {
       </div>
       <div className="navbar-center">
         <Image
-          src="/logo/logo.png" 
+          src="/logo/logo.png"
           alt="Logo"
-          width={75} 
-          height={75} 
-          className="object-contain" 
+          width={75}
+          height={75}
+          className="object-contain"
         />
       </div>
       <div className="navbar-end pr-7">

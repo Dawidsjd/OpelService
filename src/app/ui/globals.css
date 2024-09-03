@@ -31,6 +31,98 @@
     height: 50px; /* wysokość cienia na górze */
     background: linear-gradient(to top, rgb(0, 0, 0), transparent);
     z-index: 10;
+    
   }
+  .width-animation::before,
+  .width-animation::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: #141a1e;
+    z-index: 10;
+    width: 0; /* Start with a width of 0 */  
+  }
+
+  .width-animation::after {
+    box-shadow: 6px 4px 6px 0px rgba(0, 0, 0, 0.2);   
+  }
+
+  .width-animation::before {
+    box-shadow: -6px 4px 6px 0px rgba(0, 0, 0, 0.2);   
+  }
+  
+  .width-animation::before {
+    left: 0;
+  }
+  
+  .width-animation::after {
+    right: 0;
+  }
+  
+  .width-animation.width-animation-active::before {
+    animation: expandLeft 0.5s forwards ease-in-out;
+  }
+  
+  .width-animation.width-animation-inactive::before {
+    animation: shrinkLeft 0.5s forwards ease-in-out;
+    background-color: #1d232a;
+  }
+  
+  .width-animation.width-animation-active::after {
+    animation: expandRight 0.5s forwards ease-in-out;
+  }
+  
+  .width-animation.width-animation-inactive::after {
+    animation: shrinkRight 0.5s forwards ease-in-out;
+    background-color: #1d232a;
+  }
+  
+  @keyframes expandLeft {
+    0% {
+      width: 0;
+      left: 0;
+    }
+    100% {
+      width: 100px;
+      left: -100px;
+    }
+  }
+  
+  @keyframes shrinkLeft {
+    0% {
+      width: 100px;
+      left: -100px;
+    
+    }
+    100% {
+      width: 0;
+      left: 0;
+      
+    }
+  }
+  
+  @keyframes expandRight {
+    0% {
+      width: 0;
+      right: 0;
+    }
+    100% {
+      width: 100px;
+      right: -100px;
+    }
+  }
+  
+  @keyframes shrinkRight {
+    0% {
+      width: 100px;
+      right: -100px;
+    }
+    100% {
+      width: 0;
+      right: 0;
+    }
+  }
+  
 
   
