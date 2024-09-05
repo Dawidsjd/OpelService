@@ -1,12 +1,10 @@
 "use client";
 
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState, useRef } from 'react';
 import Loading from './loading';
 import Footer from './components/ui/Footer';
 import Waitlist from './components/ui/Waitlist';
 import HeaderSection from './components/HomePage/HeaderSection';
-import AboutSection from './components/HomePage/AboutSection';
-import CategorySection from './components/HomePage/CategorySection';
 import ScrollAnimatedSection from './components/HomePage/ScrollAnimatedSection';
 import TechnologiesSection from './components/HomePage/TechnologiesSection';
 import { TimelineSection } from './components/HomePage/TimeLineSection';
@@ -14,11 +12,10 @@ import SponsorSlider from './components/ui/SponsorSlider';
 import NavbarHomePage from './components/Navbar/NavbarHomePage';
 
 const HomePage: React.FC = () => {
-
   const words = ["Repair with Opel Service", "20+ support videos", "12+ categories", "20+ sections"];
   const [mounted, setMounted] = useState(false);
-
-  
+  const headerRef = useRef<HTMLDivElement>(null);
+  const sponsorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,30 +27,44 @@ const HomePage: React.FC = () => {
     };
 
     fetchData();
+
+    // Parallax effect
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (headerRef.current) {
+        headerRef.current.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleScroll = () => {
+  const handleTimelineScroll = () => {
     const section = document.getElementById('timeline-section');
     section?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <>
-
-    <Suspense fallback={<Loading />}>
-      <NavbarHomePage />
-      <HeaderSection words={words} handleScroll={handleScroll} />
-      <SponsorSlider/>
-      <TimelineSection/>
-      <ScrollAnimatedSection />
-      
-      {/* <AboutSection /> */}
-      {/* <CategorySection mounted={mounted} /> */}
-      <TechnologiesSection />
-      <Waitlist />
-      <Footer />
-    </Suspense>
-
+      <Suspense fallback={<Loading />}>
+        <NavbarHomePage />
+        <div className="relative overflow-hidden">
+          <div ref={headerRef} className="relative z-10">
+            <HeaderSection words={words} handleScroll={handleTimelineScroll} />
+          </div>
+          <div className="relative z-30">
+            <SponsorSlider />
+          </div>
+          <div className="relative z-30">
+            <TimelineSection />
+            <ScrollAnimatedSection />
+            <TechnologiesSection />
+            <Waitlist />
+            <Footer />
+          </div>
+        </div>
+      </Suspense>
     </>
   );
 };
