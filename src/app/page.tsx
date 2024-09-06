@@ -10,6 +10,7 @@ import TechnologiesSection from './components/HomePage/TechnologiesSection';
 import { TimelineSection } from './components/HomePage/TimeLineSection';
 import SponsorSlider from './components/ui/SponsorSlider';
 import NavbarHomePage from './components/Navbar/NavbarHomePage';
+import { CanvasRevealEffectDemo } from './components/ui/CanvasRevealEffectDemo';
 
 const HomePage: React.FC = () => {
   const words = ["Repair with Opel Service", "20+ support videos", "12+ categories", "20+ sections"];
@@ -47,7 +48,7 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading/>}>
         <NavbarHomePage />
         <div className="relative overflow-hidden">
           <div ref={headerRef} className="relative z-10">
@@ -60,6 +61,7 @@ const HomePage: React.FC = () => {
             <TimelineSection />
             <ScrollAnimatedSection />
             <TechnologiesSection />
+            
             <Waitlist />
             <Footer />
           </div>

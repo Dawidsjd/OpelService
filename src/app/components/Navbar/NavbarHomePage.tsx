@@ -25,7 +25,7 @@ const NavbarHomePage = () => {
         scrolled
           ? "top-0 bg-[#141a1e] text-white shadow-custom-shadow width-animation width-animation-active"
           : "top-0 xl:top-10 bg-base-100 width-animation width-animation-inactive"
-      } max-w-screen-xl left-1/2 transform -translate-x-1/2 z-50`}
+      } max-w-screen-xl left-1/2 transform -translate-x-1/2 z-40`}
     >
 
       <div className="navbar-start">
