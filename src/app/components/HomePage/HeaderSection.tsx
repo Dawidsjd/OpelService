@@ -23,7 +23,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ words, handleScroll }) =>
   return (
     <>
       {loading && <Loading />}
-      <div className="h-screen relative w-full overflow-hidden bg-[#1d232a] flex flex-col items-center justify-center rounded-lg">
+      <div className="h-screen relative w-full overflow-hidden bg-[#1d232a] flex flex-col items-center justify-center">
         {/* Background Video */}
         <BackgroundVideo src="/videos/opel_background.mp4" blurAmount={5} />
 
