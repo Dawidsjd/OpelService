@@ -54,7 +54,7 @@ async function VideoContent({ category, titleVideo }: { category: string, titleV
 
     return (
         <div className="container mx-auto p-10">
-            <div className="mockup-window bg-base-300">
+            <div className="mockup-window bg-base-300 shadow-xl">
                 <div className="bg-base-200 flex justify-center p-4">
                     <div className="flex flex-col items-center">
                         <h1 className="text-2xl font-bold my-10">

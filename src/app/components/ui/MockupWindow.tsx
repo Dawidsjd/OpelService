@@ -90,7 +90,7 @@ const MockupWindow: React.FC<MockupWindowProps> = ({ category, title, index, ini
         href={`/opel/category/${encodeURIComponent(category)}/${encodeURIComponent(title)}`}
         className="block transition-transform transform hover:scale-105 cursor-pointer"
       >
-        <div className="mockup-window bg-base-300 relative">
+        <div className="mockup-window bg-base-300 relative shadow-lg">
           <div className="absolute top-3 right-3 p-1">
             <div
               className="relative lg:tooltip lg:tooltip-left"

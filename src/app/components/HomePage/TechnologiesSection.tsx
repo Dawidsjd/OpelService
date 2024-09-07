@@ -1,6 +1,7 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { AnimatePresence, motion } from "framer-motion";
 import { CanvasRevealEffect } from '../ui/CanvasRevealEffect';
+import { IconChevronDown } from '@tabler/icons-react'; // Dodajemy ikonę
 
 // Lazy load icons
 const IconBrandNextjs = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandNextjs })));
@@ -43,7 +44,6 @@ const Card: React.FC<{ title: string; icon: React.ReactNode; children?: React.Re
       onMouseLeave={() => setHovered(false)}
       className="bg-[#0e1214] shadow-xl border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2] max-w-sm w-full mx-auto p-4 relative h-[15rem] relative"
     >
-
       <IconCross className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
       <IconCross className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
       <IconCross className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
@@ -62,9 +62,9 @@ const Card: React.FC<{ title: string; icon: React.ReactNode; children?: React.Re
       </AnimatePresence>
 
       <div className="relative z-20 text-center">
-      <div className="flex items-center justify-center group-hover/canvas-card:-translate-y-0 group-hover/canvas-card:opacity-0 transition duration-200 h-full translate-y-7">
-  {icon}
-</div>
+        <div className="flex items-center justify-center group-hover/canvas-card:-translate-y-0 group-hover/canvas-card:opacity-0 transition duration-200 h-full translate-y-7">
+          {icon}
+        </div>
 
         <h2 className="dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4 font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200">
           {title}
@@ -91,20 +91,46 @@ export const IconCross = ({ className, ...rest }: any) => {
 };
 
 const TechnologiesSection: React.FC = () => {
+  const [showMore, setShowMore] = useState(false);
+  const [expanded, setExpanded] = useState(false); // Nowy stan, który kontroluje, czy już załadowano więcej technologii
+
+  const visibleTechnologies = showMore || expanded ? technologies : technologies.slice(0, 6);
+
+  const handleClick = () => {
+    if (!expanded) {
+      setShowMore(true);
+      setExpanded(true); // Ustawiamy expanded, aby nie było możliwości ponownego kliknięcia
+    }
+  };
+
   return (
     <div id="technologies-section" className="w-full bg-[#141a1e] text-white py-16 min-h-screen relative bg-grid-white/[0.1]">
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center bg-[#141a1e] [mask-image:radial-gradient(ellipse_at_center,transparent_10%,#14181f)]"></div>
-     
-      <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-6 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-8 w-full">Użyte Technologie</h2>
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center bg-[#141a1e] [mask-image:radial-gradient(ellipse_at_center,transparent_10%,#14181f)]"></div>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          {technologies.map(({ icon: Icon, name }) => (
-            <Card key={name} title={name} icon={<Icon className="text-white mb-4" size={48} />}>
-              <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black"  />
-            </Card>
-          ))}
-        </Suspense>
+      <div className="max-w-7xl mx-auto px-6 text-center">
+        <h2 className="text-3xl font-bold mb-8">Użyte Technologie</h2>
+
+        <div className="flex flex-wrap justify-center gap-6">
+          <Suspense fallback={<div>Loading...</div>}>
+            {visibleTechnologies.map(({ icon: Icon, name }) => (
+              <Card key={name} title={name} icon={<Icon className="text-white mb-4" size={48} />}>
+                <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black" />
+              </Card>
+            ))}
+          </Suspense>
+        </div>
+
+        {/* Button to toggle more technologies */}
+        {!expanded && (
+          <div className="flex justify-center mt-8">
+            <button 
+              onClick={handleClick} 
+              className="focus:outline-none flex items-center justify-center w-12 h-12 rounded-full"
+            >
+              <IconChevronDown className="text-white w-10 h-10" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

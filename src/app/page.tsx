@@ -11,6 +11,7 @@ import { TimelineSection } from './components/HomePage/TimeLineSection';
 import SponsorSlider from './components/ui/SponsorSlider';
 import NavbarHomePage from './components/Navbar/NavbarHomePage';
 import { CanvasRevealEffectDemo } from './components/ui/CanvasRevealEffectDemo';
+import ScrollUp from './components/ui/ScrollUp';
 
 const HomePage: React.FC = () => {
   const words = ["Repair with Opel Service", "20+ support videos", "12+ categories", "20+ sections"];
@@ -32,8 +33,13 @@ const HomePage: React.FC = () => {
     // Parallax effect
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      if (headerRef.current) {
+      const isMobile = window.innerWidth <= 768; // Adjust width threshold for mobile devices
+
+      if (!isMobile && headerRef.current) {
         headerRef.current.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+      } else if (headerRef.current) {
+        // Reset transform if on mobile
+        headerRef.current.style.transform = 'translateY(0)';
       }
     };
 
@@ -66,6 +72,7 @@ const HomePage: React.FC = () => {
             <Footer />
           </div>
         </div>
+        <ScrollUp/>
       </Suspense>
     </>
   );
