@@ -1,27 +1,59 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NavbarOpel from '../components/Navbar/NavbarOpel'
-import { Search, Filter, Star, Heart } from 'lucide-react'
+import { Search, Filter, Heart } from 'lucide-react'
 
-// Mock data for offers
-const offers = [
-  { id: 1, title: 'Smartphone X', price: 599, rating: 4.5, image: '/placeholder.svg?height=200&width=200' },
-  { id: 2, title: 'Laptop Pro', price: 1299, rating: 4.8, image: '/placeholder.svg?height=200&width=200' },
-  { id: 3, title: 'Wireless Earbuds', price: 129, rating: 4.2, image: '/placeholder.svg?height=200&width=200' },
-  { id: 4, title: 'Smart Watch', price: 249, rating: 4.6, image: '/placeholder.svg?height=200&width=200' },
-  { id: 5, title: 'Gaming Console', price: 499, rating: 4.7, image: '/placeholder.svg?height=200&width=200' },
-  { id: 6, title: 'Digital Camera', price: 699, rating: 4.4, image: '/placeholder.svg?height=200&width=200' },
-]
+// Typ dla danych ofert
+interface Offer {
+  id: number
+  title: string
+  price: number
+  image: string
+  category: string
+}
 
 const Page = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [offers, setOffers] = useState<Offer[]>([])
+
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        const response = await fetch('/api/offers')
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        const data = await response.json()
+        console.log('Fetched offers:', data) // Sprawdź dane w konsoli
+
+        // Przekształcenie danych do oczekiwanego formatu
+        const formattedOffers: Offer[] = data.map((offer: any) => ({
+          id: offer.id,
+          title: offer.title || 'No Title', // Ustawienie domyślnego tytułu
+          price: parseFloat(offer.price),
+          image: offer.image,
+          category: offer.category.charAt(0).toUpperCase() + offer.category.slice(1)
+        }))
+
+        console.log('Formatted offers:', formattedOffers) // Debugowanie
+
+        setOffers(formattedOffers)
+      } catch (error) {
+        console.error('Error fetching offers:', error)
+      }
+    }
+
+    fetchOffers()
+  }, [])
 
   const filteredOffers = offers.filter(offer =>
-    offer.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedCategory === 'All' || offer.title.includes(selectedCategory))
+    (offer.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
+    (selectedCategory === 'All' || offer.category === selectedCategory)
   )
+
+  console.log('Filtered offers:', filteredOffers) // Debugowanie
 
   return (
     <>
@@ -48,12 +80,8 @@ const Page = () => {
                   onChange={(e) => setSelectedCategory(e.target.value)}
                 >
                   <option>All</option>
-                  <option>Smartphone</option>
-                  <option>Laptop</option>
-                  <option>Earbuds</option>
-                  <option>Watch</option>
-                  <option>Console</option>
-                  <option>Camera</option>
+                  <option>Parts</option>
+                  <option>Accessories</option>
                 </select>
               </div>
             </div>
@@ -63,12 +91,8 @@ const Page = () => {
                   <img src={offer.image} alt={offer.title} className="w-full h-48 object-cover" />
                   <div className="p-4">
                     <h2 className="text-xl font-semibold mb-2 text-gray-100">{offer.title}</h2>
-                    <p className="text-gray-400 mb-2">${offer.price}</p>
+                    <p className="text-gray-400 mb-2">${offer.price.toFixed(2)}</p>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Star className="text-yellow-400 mr-1" size={16} />
-                        <span className="text-gray-300">{offer.rating}</span>
-                      </div>
                       <button className="text-red-400 hover:text-red-300 transition-colors duration-200">
                         <Heart size={20} />
                       </button>
