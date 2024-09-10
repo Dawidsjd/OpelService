@@ -31,13 +31,11 @@ const Page = () => {
         // Przekształcenie danych do oczekiwanego formatu
         const formattedOffers: Offer[] = data.map((offer: any) => ({
           id: offer.id,
-          title: offer.title || 'No Title', // Ustawienie domyślnego tytułu
+          title: offer.title || 'No Title',
           price: parseFloat(offer.price),
-          image: offer.image,
-          category: offer.category.charAt(0).toUpperCase() + offer.category.slice(1)
+          image: offer.url,
+          category: offer.category.charAt(0).toUpperCase() + offer.category.slice(1) // Ujednolicenie formatu kategorii
         }))
-
-        console.log('Formatted offers:', formattedOffers) // Debugowanie
 
         setOffers(formattedOffers)
       } catch (error) {
@@ -53,7 +51,7 @@ const Page = () => {
     (selectedCategory === 'All' || offer.category === selectedCategory)
   )
 
-  console.log('Filtered offers:', filteredOffers) // Debugowanie
+  console.log('Filtered offers:', filteredOffers) // Sprawdź przefiltrowane dane
 
   return (
     <>
@@ -91,7 +89,7 @@ const Page = () => {
                   <img src={offer.image} alt={offer.title} className="w-full h-48 object-cover" />
                   <div className="p-4">
                     <h2 className="text-xl font-semibold mb-2 text-gray-100">{offer.title}</h2>
-                    <p className="text-gray-400 mb-2">${offer.price.toFixed(2)}</p>
+                    <p className="text-gray-400 mb-2">{offer.price.toFixed(2)} PLN</p> {/* Przekształcenie liczby na format z dwoma miejscami po przecinku */}
                     <div className="flex items-center justify-between">
                       <button className="text-red-400 hover:text-red-300 transition-colors duration-200">
                         <Heart size={20} />
