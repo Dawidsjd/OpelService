@@ -126,4 +126,30 @@
   }
 
 
+  /* Stylizacja paska przewijania dla przeglądarek opartych na WebKit */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #1f2937; /* ciemniejsze tło */
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4b5563; /* odcień szarości pasujący do designu */
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af; /* jaśniejszy kolor po najechaniu */
+}
+
+/* Dla Firefoxa */
+.custom-scrollbar {
+  scrollbar-color: #4b5563 #1f2937; /* kciuk i tło */
+  scrollbar-width: thin;
+}
+
+
   

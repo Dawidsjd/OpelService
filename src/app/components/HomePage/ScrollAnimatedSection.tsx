@@ -18,27 +18,39 @@ const ScrollAnimatedSection: React.FC = () => {
         />
       </div>
 
-      <div className="relative z-10 flex flex-col overflow-hidden h-full  md:-top-44">
+      <div className="relative z-10 flex flex-col overflow-hidden h-full md:-top-44">
         <ContainerScroll
           titleComponent={
             <>
               <h1 className="text-4xl font-semibold text-white">
-              Professional Services That Deliver! <br />
+                Professional Services That Deliver! <br />
                 <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-                Opel Service
+                  Opel Service
                 </span>
               </h1>
             </>
           }
         >
-          <Image
-            src={`/DeviceBackground/Categories.png`}
-            alt="hero"
-            height={720}
-            width={1400}
-            className="mx-auto rounded-2xl object-cover h-full object-left-top select-none"
-            draggable={false}
-          />
+          <div className="relative">
+            {/* Image for larger screens */}
+            <Image
+              src={`/DeviceBackground/Categories.png`}
+              alt="hero"
+              height={720}
+              width={1400}
+              className="mx-auto rounded-2xl object-cover h-full object-left-top select-none hidden md:block"
+              draggable={false}
+            />
+            {/* Image for mobile screens */}
+            <Image
+              src={`/Mobile/Mobile_1.png`}
+              alt="hero"
+              height={720}
+              width={1400}
+              className="mx-auto rounded-2xl object-cover h-full object-left-top select-none block md:hidden"
+              draggable={false}
+            />
+          </div>
         </ContainerScroll>
       </div>
 

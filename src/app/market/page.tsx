@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import NavbarOpel from '../components/Navbar/NavbarOpel'
 import { Search, Filter, Heart } from 'lucide-react'
+import SkeletonCard from '../components/ui/SkeletonCard'// Import SkeletonCard
 
-// Typ dla danych ofert
 interface Offer {
   id: number
   title: string
@@ -17,6 +17,7 @@ const Page = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [offers, setOffers] = useState<Offer[]>([])
+  const [loading, setLoading] = useState(true); // State to handle loading
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -26,20 +27,21 @@ const Page = () => {
           throw new Error('Network response was not ok')
         }
         const data = await response.json()
-        console.log('Fetched offers:', data) // Sprawdź dane w konsoli
+        console.log('Fetched offers:', data)
 
-        // Przekształcenie danych do oczekiwanego formatu
         const formattedOffers: Offer[] = data.map((offer: any) => ({
           id: offer.id,
           title: offer.title || 'No Title',
           price: parseFloat(offer.price),
           image: offer.url,
-          category: offer.category.charAt(0).toUpperCase() + offer.category.slice(1) // Ujednolicenie formatu kategorii
+          category: offer.category.charAt(0).toUpperCase() + offer.category.slice(1)
         }))
 
         setOffers(formattedOffers)
       } catch (error) {
         console.error('Error fetching offers:', error)
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
     }
 
@@ -51,12 +53,12 @@ const Page = () => {
     (selectedCategory === 'All' || offer.category === selectedCategory)
   )
 
-  console.log('Filtered offers:', filteredOffers) // Sprawdź przefiltrowane dane
+  console.log('Filtered offers:', filteredOffers)
 
   return (
     <>
       <NavbarOpel />
-      <div className="min-h-screen bg-gray-900 text-gray-100">
+      <div className="min-h-screen bg-[#141a1e] text-gray-100 bg-grid-white/[0.1] fixed w-full">
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
@@ -83,22 +85,28 @@ const Page = () => {
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredOffers.map((offer) => (
-                <div key={offer.id} className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700">
-                  <img src={offer.image} alt={offer.title} className="w-full h-48 object-cover" />
-                  <div className="p-4">
-                    <h2 className="text-xl font-semibold mb-2 text-gray-100">{offer.title}</h2>
-                    <p className="text-gray-400 mb-2">{offer.price.toFixed(2)} PLN</p> {/* Przekształcenie liczby na format z dwoma miejscami po przecinku */}
-                    <div className="flex items-center justify-between">
-                      <button className="text-red-400 hover:text-red-300 transition-colors duration-200">
-                        <Heart size={20} />
-                      </button>
+            
+            {/* Kontener z przewijaniem tylko dla sekcji ofert */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[600px] overflow-y-scroll custom-scrollbar">
+              {loading
+                ? Array(6).fill(null).map((_, index) => <SkeletonCard key={index} />) // Show skeletons while loading
+                : filteredOffers.map((offer) => (
+                    <div key={offer.id} className="bg-[#14181f] rounded-lg shadow-md overflow-hidden border border-gray-700">
+                      <img src={offer.image} alt={offer.title} className="w-full h-48 object-cover" />
+                      <div className="p-4">
+                        <h2 className="text-xl font-semibold mb-2 text-gray-100">{offer.title}</h2>
+                        <p className="text-gray-400 mb-2">{offer.price.toFixed(2)} PLN</p>
+                        <div className="flex items-center justify-between">
+                          <button className="text-red-400 hover:text-red-300 transition-colors duration-200">
+                            <Heart size={20} />
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  ))
+              }
             </div>
+
           </div>
         </main>
       </div>
