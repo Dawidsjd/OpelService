@@ -7,12 +7,12 @@ import {
   
   export default function BlackFAQ() {
     return (
-      <div className=" relative min-h-screen flex items-center justify-center bg-black p-4">
+      <div className="relative min-h-screen flex items-center justify-center bg-black p-4">
         <div className="shadow-dark w-full absolute top-0 left-0"></div>
         <div className="w-full max-w-3xl">
-        <h2 className="relative z-10 text-lg md:text-7xl w-full bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold pb-10">
+          <h2 className="relative z-10 text-lg md:text-7xl w-full bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold pb-10">
             Frequently Asked Questions
-        </h2>
+          </h2>
           <Accordion type="single" collapsible className="space-y-4">
             <AccordionItem value="item-1" className="border-b border-gray-800">
               <AccordionTrigger className="text-white hover:text-gray-300 transition-colors">
@@ -47,7 +47,7 @@ import {
               </AccordionTrigger>
               <AccordionContent className="text-gray-300">
                 Once your order is shipped, you will receive a confirmation email with a tracking number. 
-                You can use this number on our website or the carrier's website to track your package.
+                You can use this number on our website or the carrier&apos;s website to track your package.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5" className="border-b border-gray-800">
