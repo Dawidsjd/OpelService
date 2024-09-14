@@ -54,7 +54,7 @@ const Card: React.FC<{ title: string; icon: React.ReactNode; isImageIcon: boolea
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className={`h-full w-full absolute inset-0 ${isImageIcon ? '' : ''}`}
+            className={`h-full w-full absolute inset-0`}
           >
             {children}
           </motion.div>
