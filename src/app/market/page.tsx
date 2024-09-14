@@ -87,24 +87,31 @@ const Page = () => {
             </div>
             
             {/* Kontener z przewijaniem tylko dla sekcji ofert */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[600px] overflow-y-scroll custom-scrollbar">
-              {loading
-                ? Array(6).fill(null).map((_, index) => <SkeletonCard key={index} />) // Show skeletons while loading
-                : filteredOffers.map((offer) => (
-                    <div key={offer.id} className="bg-[#14181f] rounded-lg shadow-md overflow-hidden border border-gray-700">
-                      <img src={offer.image} alt={offer.title} className="w-full h-48 object-cover" />
-                      <div className="p-4">
-                        <h2 className="text-xl font-semibold mb-2 text-gray-100">{offer.title}</h2>
-                        <p className="text-gray-400 mb-2">{offer.price.toFixed(2)} PLN</p>
-                        <div className="flex items-center justify-between">
-                          <button className="text-red-400 hover:text-red-300 transition-colors duration-200">
-                            <Heart size={20} />
-                          </button>
-                        </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[600px] overflow-y-scroll custom-scrollbar pb-48 lg:pb-0">
+
+
+            {loading
+              ? Array(6).fill(null).map((_, index) => (
+                  <div key={index} className="w-full sm:w-auto mx-auto flex justify-center items-center">
+                    <SkeletonCard />
+                  </div>
+                ))
+              : filteredOffers.map((offer) => (
+                  <div key={offer.id} className="bg-[#14181f] rounded-lg shadow-md overflow-hidden border border-gray-700">
+                    <img src={offer.image} alt={offer.title} className="w-full h-48 object-cover" />
+                    <div className="p-4">
+                      <h2 className="text-xl font-semibold mb-2 text-gray-100">{offer.title}</h2>
+                      <p className="text-gray-400 mb-2">{offer.price.toFixed(2)} PLN</p>
+                      <div className="flex items-center justify-between">
+                        <button className="text-red-400 hover:text-red-300 transition-colors duration-200">
+                          <Heart size={20} />
+                        </button>
                       </div>
                     </div>
-                  ))
-              }
+                  </div>
+                ))
+            }
+
             </div>
 
           </div>

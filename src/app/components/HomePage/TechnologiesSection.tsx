@@ -8,16 +8,17 @@ const IconBrandNextjs = React.lazy(() => import('@tabler/icons-react').then(modu
 const IconBrandTailwind = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandTailwind })));
 const IconBrandFramer = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandFramer })));
 const IconBrandTypescript = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandTypescript })));
-const IconIcons = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconIcons })));
 const IconBrandVercel = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandVercel })));
-const IconBrandFirebase = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandFirebase })));
 const IconBrandReact = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandReact })));
 const IconBrandBing = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandBing })));
 const IconBrandGoogle = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconBrandGoogle })));
 const IconKey = React.lazy(() => import('@tabler/icons-react').then(module => ({ default: module.IconKey })));
 
+// Import your SVG logo as a string (path to the SVG file)
+const CCKLogo = '/logo/cck.svg'; // Ensure this path is correct
+
 interface Technology {
-  icon: React.ComponentType<{ size?: number; className?: string }> | React.ComponentType<any>;
+  icon: React.ComponentType<{ size?: number; className?: string }> | string;
   name: string;
 }
 
@@ -26,9 +27,8 @@ const technologies: Technology[] = [
   { icon: IconBrandTailwind, name: 'Tailwind CSS' },
   { icon: IconBrandFramer, name: 'Framer Motion' },
   { icon: IconBrandTypescript, name: 'TypeScript' },
-  { icon: IconIcons, name: 'Tabler Icons' },
+  { icon: CCKLogo, name: 'Car Care Kiosk' }, // Use the SVG path here
   { icon: IconBrandVercel, name: 'Vercel' },
-  { icon: IconBrandFirebase, name: 'Firebase' },
   { icon: IconBrandReact, name: 'React' },
   { icon: IconBrandBing, name: 'Bing AI' },
   { icon: IconBrandGoogle, name: 'Contentful API' },
@@ -36,13 +36,13 @@ const technologies: Technology[] = [
 ];
 
 // Component for individual cards with hover effects
-const Card: React.FC<{ title: string; icon: React.ReactNode; children?: React.ReactNode }> = ({ title, icon, children }) => {
+const Card: React.FC<{ title: string; icon: React.ReactNode; isImageIcon: boolean; children?: React.ReactNode }> = ({ title, icon, isImageIcon, children }) => {
   const [hovered, setHovered] = React.useState(false);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="bg-[#0e1214] shadow-xl border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2] max-w-sm w-full mx-auto p-4 relative h-[15rem] relative"
+      className={`bg-[#0e1214] shadow-xl border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2] max-w-sm w-full mx-auto p-4 relative h-[15rem] relative ${isImageIcon ? 'pb-8' : ''}`}
     >
       <IconCross className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
       <IconCross className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
@@ -54,7 +54,7 @@ const Card: React.FC<{ title: string; icon: React.ReactNode; children?: React.Re
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="h-full w-full absolute inset-0"
+            className={`h-full w-full absolute inset-0 ${isImageIcon ? '' : ''}`}
           >
             {children}
           </motion.div>
@@ -62,16 +62,25 @@ const Card: React.FC<{ title: string; icon: React.ReactNode; children?: React.Re
       </AnimatePresence>
 
       <div className="relative z-20 text-center">
-        <div className="flex items-center justify-center group-hover/canvas-card:-translate-y-0 group-hover/canvas-card:opacity-0 transition duration-200 h-full translate-y-7">
+        <div className={`flex items-center justify-center group-hover/canvas-card:-translate-y-0 group-hover/canvas-card:opacity-0 transition duration-200 h-full translate-y-7 ${isImageIcon ? 'mt-4' : ''}`}>
           {icon}
         </div>
 
-        <h2 className="dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4 font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200">
+        <h2 className={`dark:text-white text-xl opacity-0 group-hover/canvas-card:opacity-100 relative z-10 text-black mt-4 font-bold group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200 ${isImageIcon ? 'mt-6' : ''}`}>
           {title}
         </h2>
       </div>
     </div>
   );
+};
+
+// Render icon function
+const renderIcon = (icon: Technology['icon'], name: string) => {
+  if (typeof icon === 'string') {
+    return <img src={icon} alt={name} className="h-48 w-48 absolute" />;
+  }
+  const IconComponent = icon;
+  return <IconComponent size={48} className="text-white mb-4" />;
 };
 
 export const IconCross = ({ className, ...rest }: any) => {
@@ -108,12 +117,12 @@ const TechnologiesSection: React.FC = () => {
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center bg-[#141a1e] [mask-image:radial-gradient(ellipse_at_center,transparent_10%,#14181f)]"></div>
 
       <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold mb-8">Użyte Technologie</h2>
+        <h2 className="text-3xl font-bold mb-8">Used Technologies</h2>
 
         <div className="flex flex-wrap justify-center gap-6">
           <Suspense fallback={<div>Loading...</div>}>
-            {visibleTechnologies.map(({ icon: Icon, name }) => (
-              <Card key={name} title={name} icon={<Icon className="text-white mb-4" size={48} />}>
+            {visibleTechnologies.map(({ icon, name }) => (
+              <Card key={name} title={name} icon={renderIcon(icon, name)} isImageIcon={typeof icon === 'string'}>
                 <CanvasRevealEffect animationSpeed={3} containerClassName="bg-black" />
               </Card>
             ))}

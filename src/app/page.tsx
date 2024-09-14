@@ -12,6 +12,7 @@ import SponsorSlider from './components/ui/SponsorSlider';
 import NavbarHomePage from './components/Navbar/NavbarHomePage';
 import { CanvasRevealEffectDemo } from './components/ui/CanvasRevealEffectDemo';
 import ScrollUp from './components/ui/ScrollUp';
+import BlackFAQ from './components/ui/FAQ';
 
 const HomePage: React.FC = () => {
   const words = ["Repair with Opel Service", "20+ support videos", "12+ categories", "20+ sections"];
@@ -68,7 +69,8 @@ const HomePage: React.FC = () => {
             <ScrollAnimatedSection />
             <TechnologiesSection />
             
-            <Waitlist />
+            {/* <Waitlist /> */}
+            <BlackFAQ/>
             <Footer />
           </div>
         </div>
