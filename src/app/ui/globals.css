@@ -150,6 +150,11 @@
   scrollbar-color: #4b5563 #1f2937; /* kciuk i tło */
   scrollbar-width: thin;
 }
+@layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}
 
 
   
