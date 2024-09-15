@@ -72,84 +72,88 @@ const ProductDetailPage = () => {
     <>
       <NavbarOpel />
       <div className="container mx-auto px-4 text-gray-100 min-h-[90vh] flex justify-center items-center">
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center">
-    {/* Product Images */}
-    <div className="flex justify-center">
-      <Carousel className="w-full max-w-xs mx-auto">
-        <CarouselContent>
-          {imageList.map((imgSrc, index) => (
-            <CarouselItem key={index}>
-              <Card className="bg-gray-800">
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <img
-                    src={imgSrc}
-                    alt={`Product image ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </CardContent>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center">
+          {/* Product Images */}
+          <div className="flex justify-center">
+            <Carousel className="w-full max-w-xs sm:max-w-xs md:max-w-md lg:max-w-lg mx-auto">
+              <CarouselContent>
+                {imageList.map((imgSrc, index) => (
+                  <CarouselItem key={index}>
+                    <Card className="bg-gray-800">
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <img
+                          src={imgSrc}
+                          alt={`Product image ${index + 1}`}
+                          className="w-full h-full object-contain"
+                        />
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+               {/* Show arrows only on medium screens and up */}
+               <div className="hidden xl:block ">
+                <CarouselPrevious />
+              </div>
+              <div className="hidden xl:block ">
+                <CarouselNext />
+              </div>
+            </Carousel>
+          </div>
 
-    {/* Product Information */}
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-100">{product?.title || 'Product Title'}</h1>
+          {/* Product Information */}
+          <div className="space-y-6">
+            <h1 className="text-3xl font-bold text-gray-100">{product?.title || 'Product Title'}</h1>
 
-      <div className="flex items-center space-x-2">
-        <span className="text-2xl font-bold text-gray-100">{product?.price.toFixed(2)} PLN</span>
-        <Badge variant="secondary" className="bg-gray-700 text-gray-100">-20%</Badge>
-        <span className="text-sm text-gray-400 line-through">2499 PLN</span>
-      </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl font-bold text-gray-100">{product?.price.toFixed(2)} PLN</span>
+              <Badge variant="secondary" className="bg-gray-700 text-gray-100">-20%</Badge>
+              <span className="text-sm text-gray-400 line-through">2499 PLN</span>
+            </div>
 
-      <div className="flex items-center space-x-1">
-        {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-5 h-5 fill-yellow-400" />
-        ))}
-        <span className="text-sm text-gray-400">(128 reviews)</span>
-      </div>
+            <div className="flex items-center space-x-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-yellow-400" />
+              ))}
+              <span className="text-sm text-gray-400">(128 reviews)</span>
+            </div>
 
-      <p className="text-gray-300">
-        {product?.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non urna sit amet nisl fermentum posuere.'}
-      </p>
+            <p className="text-gray-300">
+              {product?.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non urna sit amet nisl fermentum posuere.'}
+            </p>
 
-      <div className="space-y-4">
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="bg-gray-700 text-gray-100 hover:bg-gray-600"
-          >
-            -
-          </Button>
-          <span className="w-12 text-center">{quantity}</span>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setQuantity(quantity + 1)}
-            className="bg-gray-700 text-gray-100 hover:bg-gray-600"
-          >
-            +
-          </Button>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="bg-gray-700 text-gray-100 hover:bg-gray-600"
+                >
+                  -
+                </Button>
+                <span className="w-12 text-center">{quantity}</span>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="bg-gray-700 text-gray-100 hover:bg-gray-600"
+                >
+                  +
+                </Button>
+              </div>
+              <div className="flex space-x-2">
+                <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+                  <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+                </Button>
+                <Button variant="secondary" className="bg-gray-700 hover:bg-gray-600 text-gray-100">
+                  <Heart className="mr-2 h-4 w-4" /> Add to Wishlist
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex space-x-2">
-          <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
-            <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
-          </Button>
-          <Button variant="secondary" className="bg-gray-700 hover:bg-gray-600 text-gray-100">
-            <Heart className="mr-2 h-4 w-4" /> Add to Wishlist
-          </Button>
-        </div>
       </div>
-    </div>
-  </div>
-</div>
-
     </>
   )
 }
