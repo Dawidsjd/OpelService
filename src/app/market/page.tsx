@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import NavbarOpel from '../components/Navbar/NavbarOpel'
 import { Search, Filter, Heart } from 'lucide-react'
 import SkeletonCard from '../components/ui/SkeletonCard'// Import SkeletonCard
+import Link from 'next/link'
 
 interface Offer {
   id: number
@@ -97,18 +98,16 @@ const Page = () => {
                   </div>
                 ))
               : filteredOffers.map((offer) => (
-                  <div key={offer.id} className="bg-[#14181f] rounded-lg shadow-md overflow-hidden border border-gray-700">
+                <Link key={offer.id} href={`/market/${offer.id}`}>
+                  <div className="cursor-pointer bg-[#14181f] rounded-lg shadow-md overflow-hidden border border-gray-700">
                     <img src={offer.image} alt={offer.title} className="w-full h-48 object-cover" />
                     <div className="p-4">
                       <h2 className="text-xl font-semibold mb-2 text-gray-100">{offer.title}</h2>
                       <p className="text-gray-400 mb-2">{offer.price.toFixed(2)} PLN</p>
-                      <div className="flex items-center justify-between">
-                        <button className="text-red-400 hover:text-red-300 transition-colors duration-200">
-                          <Heart size={20} />
-                        </button>
-                      </div>
                     </div>
                   </div>
+                </Link>
+              
                 ))
             }
 
