@@ -1,6 +1,6 @@
 # 🔧 OpelService – Centrum naprawy i części do Opla Astry
 <div align="center">
-![2025-05-2822-31-31-ezgif com-video-to-gif-converter (2)](https://github.com/user-attachments/assets/a1f006dd-dc91-4a00-b163-d6765dcd16c3)
+  <img src="https://github.com/user-attachments/assets/a1f006dd-dc91-4a00-b163-d6765dcd16c3" alt="Podgląd OpelService" width="600">
 </div>
 
 **OpelService** to nowoczesna aplikacja webowa dla właścicieli Opla Astry. Łączy w sobie **bazę filmów instruktażowych** z **marketplace'em używanych części**, pomagając użytkownikom w samodzielnych naprawach i oszczędnościach.
