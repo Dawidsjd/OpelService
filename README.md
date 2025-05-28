@@ -17,7 +17,7 @@
 
 
 <div align="center">
-  <img src="[https://github.com/user-attachments/assets/a1f006dd-dc91-4a00-b163-d6765dcd16c3](https://github.com/user-attachments/assets/0360765e-374c-4303-b2b5-19aa3e912c66)" alt="Podgląd OpelService" width="600">
+  <img src="https://github.com/user-attachments/assets/0360765e-374c-4303-b2b5-19aa3e912c66" alt="Podgląd OpelService" width="600">
 </div>
 
 ## 🛠 Technologie
